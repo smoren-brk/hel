@@ -12,7 +12,7 @@ import qs.utils
 Searcher {
     id: root
 
-    readonly property string fallback: Quickshell.shellPath("assets/wallpaper.webp")
+    readonly property string fallback: Quickshell.env("CAELESTIA_WALLPAPER") || Quickshell.shellPath("assets/wallpaper.webp")
 
     property bool showPreview: false
     readonly property string current: showPreview ? previewPath : actualCurrent

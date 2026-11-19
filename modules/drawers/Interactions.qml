@@ -110,8 +110,8 @@ CustomMouseArea {
         if (!screenState.bar && Config.bar.showOnHover && x < bar.clampedWidth)
             bar.isHovered = true;
 
-        // Show/hide bar on drag
-        if (pressed && dragStart.x < bar.clampedWidth) {
+        // Show/hide bar on drag (only when the bar is allowed to hover in)
+        if (pressed && Config.bar.showOnHover && !bar.disabled && dragStart.x < bar.clampedWidth) {
             if (dragX > Config.bar.dragThreshold)
                 screenState.bar = true;
             else if (dragX < -Config.bar.dragThreshold)

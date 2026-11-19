@@ -38,6 +38,13 @@ PageBase {
             onToggled: GlobalConfig.bar.showOnHover = checked
         }
 
+        ToggleRow {
+            text: Tr.tr("Only on main screen")
+            subtext: Tr.tr("Show the bar only on the primary display")
+            checked: Config.bar.onlyOnMainScreen
+            onToggled: GlobalConfig.bar.onlyOnMainScreen = checked
+        }
+
         StepperRow {
             last: true
             label: Tr.tr("Drag threshold")

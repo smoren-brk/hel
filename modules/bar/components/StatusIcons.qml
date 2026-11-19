@@ -22,7 +22,7 @@ StyledRect {
 
     clip: true
     implicitWidth: Tokens.sizes.bar.innerWidth
-    implicitHeight: iconColumn.implicitHeight + Tokens.padding.medium * 2
+    implicitHeight: iconColumn.implicitHeight + Tokens.padding.small * 2
 
     ColumnLayout {
         id: iconColumn
@@ -30,7 +30,7 @@ StyledRect {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Tokens.padding.medium
+        anchors.bottomMargin: Tokens.padding.small
 
         spacing: 0
 
@@ -62,7 +62,7 @@ StyledRect {
                             animate: true
                             text: Icons.getVolumeIcon(Audio.volume, Audio.muted)
                             color: root.colour
-                            fontStyle: Tokens.font.icon.medium
+                            fontStyle: Tokens.font.icon.builders.medium.scale(0.9).build()
                             fill: 1
                         }
                     }
@@ -77,7 +77,7 @@ StyledRect {
                             animate: true
                             text: Icons.getMicVolumeIcon(Audio.sourceVolume, Audio.sourceMuted)
                             color: root.colour
-                            fontStyle: Tokens.font.icon.medium
+                            fontStyle: Tokens.font.icon.builders.medium.scale(0.9).build()
                             fill: 1
                         }
                     }
