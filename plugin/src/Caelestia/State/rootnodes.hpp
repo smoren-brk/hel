@@ -10,6 +10,7 @@ class PStateRoot : public settings::RootNode {
     STATE_NODE_NO_CTOR(PStateRoot, settings::RootNode)
     QML_ANONYMOUS
 
+    STATE_GLOBAL_PROPERTY(QString, wallpaperPath, {})
     STATE_GLOBAL_PROPERTY(bool, wallpaperPlaying, true)
     STATE_GLOBAL_PROPERTY(bool, doNotDisturb, false)
 
@@ -21,7 +22,6 @@ class RStateRoot : public settings::RootNode {
     STATE_NODE_NO_CTOR(RStateRoot, settings::RootNode)
     QML_ANONYMOUS
 
-    STATE_GLOBAL_PROPERTY(bool, gameMode, false)
     STATE_GLOBAL_PROPERTY(bool, inhibitIdle, false)
     STATE_GLOBAL_PROPERTY(qreal, inhibitingIdleSince, -1)
 

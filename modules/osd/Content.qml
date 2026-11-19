@@ -12,14 +12,10 @@ import qs.utils
 Item {
     id: root
 
-    required property Brightness.Monitor monitor
-    required property ScreenState screenState
-
     required property real volume
     required property bool muted
     required property real sourceVolume
     required property bool sourceMuted
-    required property real brightness
 
     implicitWidth: layout.implicitWidth + Tokens.padding.large + layout.anchors.horizontalCenterOffset * 2
     implicitHeight: layout.implicitHeight + Tokens.padding.large * 2
@@ -55,7 +51,7 @@ Item {
 
         // Microphone volume
         WrappedLoader {
-            shouldBeActive: Config.osd.enableMicrophone && (!Config.osd.enableBrightness || !root.screenState.session)
+            shouldBeActive: Config.osd.enableMicrophone
 
             sourceComponent: CustomMouseArea {
                 function onWheel(event: WheelEvent) {
@@ -75,34 +71,6 @@ Item {
                     value: root.sourceVolume
                     to: GlobalConfig.services.maxVolume
                     onMoved: Audio.setSourceVolume(value)
-                }
-            }
-        }
-
-        // Brightness
-        WrappedLoader {
-            shouldBeActive: Config.osd.enableBrightness
-
-            sourceComponent: CustomMouseArea {
-                function onWheel(event: WheelEvent) {
-                    const monitor = root.monitor;
-                    if (!monitor)
-                        return;
-                    if (event.angleDelta.y > 0)
-                        monitor.setBrightness(monitor.brightness + GlobalConfig.services.brightnessIncrement);
-                    else if (event.angleDelta.y < 0)
-                        monitor.setBrightness(monitor.brightness - GlobalConfig.services.brightnessIncrement);
-                }
-
-                implicitWidth: Tokens.sizes.osd.sliderWidth
-                implicitHeight: Tokens.sizes.osd.sliderHeight
-
-                FilledSlider {
-                    anchors.fill: parent
-
-                    icon: `brightness_${(Math.round(value * 6) + 1)}`
-                    value: root.brightness
-                    onMoved: root.monitor?.setBrightness(value)
                 }
             }
         }

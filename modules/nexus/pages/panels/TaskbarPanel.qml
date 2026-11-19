@@ -110,13 +110,5 @@ PageBase {
             checked: Config.bar.scrollActions.volume
             onToggled: GlobalConfig.bar.scrollActions.volume = checked
         }
-
-        ToggleRow {
-            last: true
-            text: Tr.tr("Brightness")
-            subtext: Tr.tr("Scroll on the bottom half of the bar to adjust brightness")
-            checked: Config.bar.scrollActions.brightness
-            onToggled: GlobalConfig.bar.scrollActions.brightness = checked
-        }
     }
 }

@@ -123,7 +123,7 @@ Item {
 
                     Layout.preferredWidth: implicitWidth + (actionStateLayer.pressed ? Tokens.padding.large : 0)
                     radius: actionStateLayer.pressed ? Tokens.rounding.medium / 2 : Tokens.rounding.medium
-                    color: Colours.layer(Colours.palette.m3surfaceContainerHighest, 4)
+                    color: Colours.palette.m3surfaceContainerHighest
 
                     Timer {
                         id: copyTimer

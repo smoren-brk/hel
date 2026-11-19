@@ -31,8 +31,10 @@ Scope {
             lock.lock.locked = true;
         else if (action === "unlock")
             lock.lock.locked = false;
+        else if (action === "dpms off" || action === "dpms on")
+            Quickshell.execDetached(["niri", "msg", "action", action === "dpms off" ? "power-off-monitors" : "power-on-monitors"]);
         else if (typeof action === "string")
-            Hypr.dispatch(Hypr.usingLua && ["dpms off", "dpms on"].includes(action) ? `hl.dsp.dpms({ action = "${action === "dpms off" ? "disable" : "enable"}" })` : action);
+            console.warn("Unknown idle action:", action);
         else if (!SessionManager.exec(action))
             Quickshell.execDetached(action);
     }

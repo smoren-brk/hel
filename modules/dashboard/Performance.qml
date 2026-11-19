@@ -18,7 +18,7 @@ Item {
         id: placeholder
 
         anchors.centerIn: parent
-        active: !Config.dashboard.performance.showCpu && !(Config.dashboard.performance.showGpu && Gpu.type !== GpuType.None) && !Config.dashboard.performance.showMemory && !Config.dashboard.performance.showStorage && !Config.dashboard.performance.showNetwork && !(UPower.displayDevice.isLaptopBattery && Config.dashboard.performance.showBattery)
+        active: !Config.dashboard.performance.showCpu && !(Config.dashboard.performance.showGpu && Gpu.type !== GpuType.None) && !Config.dashboard.performance.showStorage && !Config.dashboard.performance.showNetwork && !(UPower.displayDevice.isLaptopBattery && Config.dashboard.performance.showBattery)
         asynchronous: true
 
         sourceComponent: ColumnLayout {
@@ -75,6 +75,7 @@ Item {
                         icon: "memory"
                         label: Tr.tr("CPU")
                         subLabel: Cpu.name
+                        history: Cpu.history
                         usage: Cpu.percentage
                         temperature: Cpu.temperature
                         accent: Colours.palette.m3primary
@@ -94,6 +95,7 @@ Item {
                         icon: "desktop_windows"
                         label: Tr.tr("GPU")
                         subLabel: Gpu.name || (Gpu.detecting ? Tr.tr("Detecting GPU...") : Tr.trCtx("None", "GPU name"))
+                        history: Gpu.history
                         usage: Gpu.percentage
                         temperature: Gpu.temperature
                         accent: Colours.palette.m3secondary
@@ -107,7 +109,7 @@ Item {
 
             RowLayout {
                 spacing: Tokens.spacing.medium
-                visible: storageCard.active || networkCard.active || memoryCard.active
+                visible: storageCard.active || networkCard.active
 
                 WrappedLoader {
                     id: storageCard
@@ -121,13 +123,6 @@ Item {
 
                     active: Config.dashboard.performance.showNetwork
                     sourceComponent: NetworkCard {}
-                }
-
-                WrappedLoader {
-                    id: memoryCard
-
-                    active: Config.dashboard.performance.showMemory
-                    sourceComponent: MemoryCard {}
                 }
             }
         }

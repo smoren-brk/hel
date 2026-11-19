@@ -58,7 +58,7 @@ StyledRect {
 
     clip: true
     radius: Tokens.rounding.large
-    color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
+    color: Colours.palette.m3surfaceContainer
 
     Behavior on implicitHeight {
         Anim {}
@@ -119,7 +119,7 @@ StyledRect {
 
             ClipRect {
                 anchors.fill: parent
-                color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3error : root.urgency === NotificationUrgency.Low ? Colours.layer(Colours.palette.m3surfaceContainerHigh, 3) : Colours.palette.m3secondaryContainer
+                color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3error : root.urgency === NotificationUrgency.Low ? Colours.palette.m3surfaceContainerHigh : Colours.palette.m3secondaryContainer
                 radius: Tokens.rounding.full
 
                 Loader {
@@ -190,7 +190,7 @@ StyledRect {
                     implicitWidth: expandBtn.implicitWidth + Tokens.padding.large
                     implicitHeight: groupCount.implicitHeight + Tokens.padding.extraSmall
 
-                    color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3error : Colours.layer(Colours.palette.m3surfaceContainerHigh, 3)
+                    color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3error : Colours.palette.m3surfaceContainerHigh
                     radius: Tokens.rounding.full
 
                     StateLayer {

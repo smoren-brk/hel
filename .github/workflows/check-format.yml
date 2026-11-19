@@ -18,19 +18,19 @@ jobs:
     needs: changes
     if: needs.changes.outputs.format-qml == 'true'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository_owner }}/shell-arch-env:latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v7
 
+      - uses: nixbuild/nix-quick-install-action@v34
+
       - name: Check QML format
-        shell: fish {0}
+        shell: nix develop --command fish {0}
         run: |
-          /usr/lib/qt6/bin/qmlformat --version
+          qmlformat --version
           for file in (string match -v 'build/*' **.qml)
-            /usr/lib/qt6/bin/qmlformat $file | diff -u $file - || exit 1
+            qmlformat $file | diff -u $file - || exit 1
           end
           python3 scripts/qml-lint-conventions.py
 
@@ -38,15 +38,15 @@ jobs:
     needs: changes
     if: needs.changes.outputs.format-cpp == 'true'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository_owner }}/shell-arch-env:latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v7
 
+      - uses: nixbuild/nix-quick-install-action@v34
+
       - name: Check C++ format
-        shell: fish {0}
+        shell: nix develop --command fish {0}
         run: |
           clang-format --version
           find plugin extras -name '*.cpp' -o -name '*.hpp' \
@@ -59,10 +59,12 @@ jobs:
       - check-qml
       - check-cpp
     runs-on: ubuntu-latest
-    permissions: {}
+    permissions:
+      contents: read
     steps:
+      - uses: actions/checkout@v7
       - name: Verify formatting results
-        uses: $/.github/actions/verify-checks
+        uses: ./.github/actions/verify-checks
         with:
           needs: ${{ toJSON(needs) }}
           checks: |

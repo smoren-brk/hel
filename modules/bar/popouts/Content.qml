@@ -5,12 +5,14 @@ import Quickshell
 import Quickshell.Services.SystemTray
 import Caelestia.Config
 import qs.components
+import qs.components.controls
 import qs.services
-import qs.modules.bar.popouts.kblayout
+import qs.modules.dashboard.dash as DashWidgets
 
 Item {
     id: root
 
+    required property ScreenState screenState
     required property PopoutState popouts
     readonly property Popout currentPopout: content.children.find(c => c.shouldBeActive) ?? null
     readonly property Item current: currentPopout?.item ?? null
@@ -30,9 +32,9 @@ Item {
         anchors.margins: Tokens.padding.large
 
         Popout {
-            name: "activewindow"
-            sourceComponent: ActiveWindow {
-                popouts: root.popouts
+            name: "calendar"
+            sourceComponent: DashWidgets.Calendar {
+                screenState: root.screenState
             }
         }
 
@@ -108,20 +110,27 @@ Item {
         }
 
         Popout {
-            name: "audio"
-            sourceComponent: AudioPopout {
-                popouts: root.popouts
+            name: "kblayout"
+            sourceComponent: Column {
+                Repeater {
+                    model: NiriService.layouts.names
+                    delegate: IconTextButton {
+                        required property string modelData
+                        required property int index
+
+                        text: modelData
+                        icon: index === NiriService.layouts.currentIndex ? "check" : "keyboard"
+                        onClicked: NiriService.switchLayout(index)
+                    }
+                }
             }
         }
 
         Popout {
-            name: "kblayout"
-            sourceComponent: KbLayout {}
-        }
-
-        Popout {
-            name: "lockstatus"
-            sourceComponent: LockStatus {}
+            name: "audio"
+            sourceComponent: AudioPopout {
+                popouts: root.popouts
+            }
         }
 
         Repeater {

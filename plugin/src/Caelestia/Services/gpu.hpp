@@ -5,6 +5,7 @@
 #include <qstringlist.h>
 
 #include "config/enums.hpp"
+#include "core/circularbuffer.hpp"
 #include "tickingservice.hpp"
 
 namespace caelestia::shell::services {
@@ -17,6 +18,7 @@ class Gpu : public TickingService {
     QML_SINGLETON
 
     Q_PROPERTY(caelestia::shell::config::GpuType::Enum type READ type NOTIFY typeChanged)
+    Q_PROPERTY(caelestia::shell::CircularBuffer* history READ history CONSTANT)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(bool detecting READ detecting NOTIFY detectingChanged)
     Q_PROPERTY(qreal percentage READ percentage NOTIFY percentageChanged)
@@ -26,6 +28,7 @@ public:
     explicit Gpu(QObject* parent = nullptr);
 
     [[nodiscard]] GpuType type() const;
+    [[nodiscard]] CircularBuffer* history() const;
     [[nodiscard]] QString name() const;
     [[nodiscard]] bool detecting() const;
     [[nodiscard]] qreal percentage() const;
@@ -71,6 +74,7 @@ private:
     GpuType m_type = GpuType::None;
     // The raw device name, empty while detecting and when there is no GPU to name
     QString m_name;
+    CircularBuffer* m_history;
     bool m_detecting = false;
     qreal m_percentage = 0.0;
     qreal m_temperature = 0.0;

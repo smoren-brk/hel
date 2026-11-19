@@ -80,10 +80,6 @@ TOKENS_ATTACHED_GETTER(AppearancePadding, padding)
 
 #undef TOKENS_ATTACHED_GETTER
 
-const AppearanceTransparency* Tokens::transparency() {
-    return ConfigSingleton::instance()->appearance()->transparency(); // Transparency is always global
-}
-
 const SizeTokens* Tokens::sizes() const {
     if (m_tokens)
         return m_tokens->sizes();

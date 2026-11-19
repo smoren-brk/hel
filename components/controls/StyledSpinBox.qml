@@ -9,7 +9,6 @@ DoubleSpinBox {
 
     property int repeatRate: 400
     property int repeatDecay: 50
-    property int cLayer: 1
 
     function increase(): void {
         let newValue = Math.min(to, value + stepSize);
@@ -54,7 +53,7 @@ DoubleSpinBox {
 
         background: StyledRect {
             radius: Tokens.rounding.extraSmall
-            color: Colours.layer(Colours.palette.m3surfaceContainerHighest, root.cLayer)
+            color: Colours.palette.m3surfaceContainerHighest
         }
     }
 
@@ -66,7 +65,7 @@ DoubleSpinBox {
 
         icon: "remove"
         disabledColour: Qt.alpha(Colours.palette.m3surfaceContainerHighest, 0.4)
-        color: disabled ? disabledColour : Colours.layer(Colours.palette.m3surfaceContainerHighest, root.cLayer)
+        color: disabled ? disabledColour : Colours.palette.m3surfaceContainerHighest
         type: IconButton.Text
         padding: Tokens.padding.extraSmall
         isRound: true
@@ -102,7 +101,7 @@ DoubleSpinBox {
 
         icon: "add"
         disabledColour: Qt.alpha(Colours.palette.m3surfaceContainerHighest, 0.4)
-        color: disabled ? disabledColour : Colours.layer(Colours.palette.m3surfaceContainerHighest, root.cLayer)
+        color: disabled ? disabledColour : Colours.palette.m3surfaceContainerHighest
         type: IconButton.Text
         padding: Tokens.padding.extraSmall
         isRound: true

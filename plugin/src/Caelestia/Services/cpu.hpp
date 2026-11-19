@@ -2,6 +2,7 @@
 
 #include <qqmlintegration.h>
 
+#include "core/circularbuffer.hpp"
 #include "tickingservice.hpp"
 
 namespace caelestia::shell::services {
@@ -11,6 +12,7 @@ class Cpu : public TickingService {
     QML_ELEMENT
     QML_SINGLETON
 
+    Q_PROPERTY(caelestia::shell::CircularBuffer* history READ history CONSTANT)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(qreal percentage READ percentage NOTIFY percentageChanged)
     Q_PROPERTY(qreal temperature READ temperature NOTIFY temperatureChanged)
@@ -18,6 +20,7 @@ class Cpu : public TickingService {
 public:
     explicit Cpu(QObject* parent = nullptr);
 
+    [[nodiscard]] CircularBuffer* history() const;
     [[nodiscard]] QString name() const;
     [[nodiscard]] qreal percentage() const;
     [[nodiscard]] qreal temperature() const;
@@ -38,6 +41,7 @@ private:
     [[nodiscard]] static QString cleanName(QString s);
 
     QString m_name;
+    CircularBuffer* m_history;
     qreal m_percentage = 0.0;
     qreal m_temperature = 0.0;
     quint64 m_lastIdle = 0;

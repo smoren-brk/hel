@@ -1,5 +1,5 @@
 {
-  description = "Desktop shell for Caelestia dots";
+  description = "Hel desktop shell for Niri on NixOS";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -9,10 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    caelestia-cli = {
-      url = "github:caelestia-dots/cli";
+    qml-niri = {
+      url = "github:imiric/qml-niri/main";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.caelestia-shell.follows = "";
+      inputs.quickshell.follows = "quickshell";
     };
 
     m3shapes = {
@@ -37,31 +37,30 @@
     packages = eachSystem (system: let
       pkgs = pkgsOf.${system};
     in rec {
-      caelestia-shell = pkgs.callPackage ./nix {
-        rev = self.rev or self.dirtyRev;
+      hel = pkgs.callPackage ./nix {
+        rev = self.rev or self.dirtyRev or "local";
         stdenv = pkgs.clangStdenv;
         quickshell = inputs.quickshell.packages.${system}.default.override {
           withX11 = false;
           withI3 = false;
+          withHyprland = false;
         };
-        caelestia-cli = inputs.caelestia-cli.packages.${system}.default;
+        qml-niri = inputs.qml-niri.packages.${system}.default;
         m3shapes = inputs.m3shapes.packages.${system}.default;
       };
-      with-cli = caelestia-shell.override {withCli = true;};
-      debug = caelestia-shell.override {debug = true;};
-      default = caelestia-shell;
+      debug = hel.override {debug = true;};
+      default = hel;
     });
 
     devShells = eachSystem (system: {
       default = let
         pkgs = pkgsOf.${system};
-        shell = self.packages.${system}.caelestia-shell;
+        shell = self.packages.${system}.hel;
         mkShell = pkgs.mkShell.override {stdenv = shell.stdenv;};
       in
         mkShell {
           inputsFrom = [shell shell.plugin shell.extras];
-          packages = with pkgs; [clazy material-symbols rubik nerd-fonts.caskaydia-cove];
-          CAELESTIA_XKB_RULES_PATH = "${pkgs.xkeyboard-config}/share/xkeyboard-config-2/rules/base.lst";
+          packages = with pkgs; [clazy clang-tools python3 qt6.qtdeclarative material-symbols rubik nerd-fonts.caskaydia-cove];
         };
     });
 

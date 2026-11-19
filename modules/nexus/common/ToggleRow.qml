@@ -21,7 +21,6 @@ StyledSwitch {
 
     implicitWidth: implicitContentWidth + implicitIndicatorWidth + horizontalPadding * 2
     implicitHeight: Math.max(implicitContentHeight, implicitIndicatorHeight) + verticalPadding * 2
-    cLayer: 2
 
     indicator.anchors.verticalCenter: verticalCenter
     indicator.anchors.right: right

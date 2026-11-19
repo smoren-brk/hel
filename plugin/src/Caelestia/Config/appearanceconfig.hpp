@@ -262,14 +262,6 @@ class AppearanceAnim : public settings::ObjectNode {
     CONFIG_SUBOBJECT(AnimDurations, durations)
 };
 
-class AppearanceTransparency : public settings::ObjectNode {
-    CONFIG_NODE(AppearanceTransparency, settings::ObjectNode)
-
-    CONFIG_GLOBAL_PROPERTY(bool, enabled, false)
-    CONFIG_GLOBAL_PROPERTY(qreal, base, 0.85)
-    CONFIG_GLOBAL_PROPERTY(qreal, layers, 0.4)
-};
-
 class AppearanceConfig : public settings::ObjectNode {
     CONFIG_NODE(AppearanceConfig, settings::ObjectNode)
 
@@ -279,7 +271,6 @@ class AppearanceConfig : public settings::ObjectNode {
     CONFIG_SUBOBJECT(AppearancePadding, padding)
     CONFIG_SUBOBJECT(AppearanceFont, font)
     CONFIG_SUBOBJECT(AppearanceAnim, anim)
-    CONFIG_SUBOBJECT(AppearanceTransparency, transparency)
 };
 
 } // namespace caelestia::shell::config

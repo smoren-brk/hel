@@ -23,9 +23,8 @@ CONFIG_LIST_TYPE(PlayerAlias, PlayerAliasList)
 class ServiceConfig : public settings::ObjectNode {
     CONFIG_NODE(ServiceConfig, settings::ObjectNode)
 
-    CONFIG_GLOBAL_PROPERTY(QString, weatherLocation, {})
-    // Auto guesses based on locale
-    CONFIG_GLOBAL_ENUM_PROPERTY(TemperatureUnit, weatherUnits, TemperatureUnit::Auto)
+    CONFIG_GLOBAL_PROPERTY(QString, weatherLocation, u"Novi Sad"_s)
+    CONFIG_GLOBAL_ENUM_PROPERTY(TemperatureUnit, weatherUnits, TemperatureUnit::Celsius)
     // Always Celsius by default cause apparently even imperial system users don't use Fahrenheit for perf temps?
     CONFIG_GLOBAL_ENUM_PROPERTY(TemperatureUnit, sensorUnits, TemperatureUnit::Celsius)
     // Binary (KiB/MiB/GiB) or decimal (KB/MB/GB) data sizes
@@ -34,9 +33,7 @@ class ServiceConfig : public settings::ObjectNode {
     CONFIG_GLOBAL_ENUM_PROPERTY(GpuType, gpuType, GpuType::Auto)
     CONFIG_GLOBAL_PROPERTY(int, visualiserBars, 60)
     CONFIG_GLOBAL_PROPERTY(qreal, audioIncrement, 0.1)
-    CONFIG_GLOBAL_PROPERTY(qreal, brightnessIncrement, 0.1)
     CONFIG_GLOBAL_PROPERTY(qreal, maxVolume, 1.0)
-    CONFIG_GLOBAL_PROPERTY(bool, smartScheme, true)
     CONFIG_GLOBAL_PROPERTY(QString, defaultPlayer, u"Spotify"_s)
     CONFIG_GLOBAL_LIST(PlayerAliasList, playerAliases,
         DEFAULT_ARG({

@@ -59,7 +59,6 @@ ConnectedRect {
             to: root.to
             stepSize: root.stepSize
             value: root.value
-            cLayer: 2
             onValueModified: root.moved(value)
         }
     }

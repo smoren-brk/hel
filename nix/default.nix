@@ -5,15 +5,14 @@
   makeWrapper,
   makeFontsConf,
   fish,
-  ddcutil,
-  brightnessctl,
+  niri,
+  libnotify,
   networkmanager,
   lm_sensors,
   swappy,
   wl-clipboard,
   libqalculate,
   bash,
-  hyprland,
   material-symbols,
   rubik,
   nerd-fonts,
@@ -23,35 +22,31 @@
   libcava,
   fftw,
   pipewire,
-  xkeyboard-config,
   cmake,
   ninja,
   pkg-config,
-  caelestia-cli,
+  qml-niri,
   m3shapes,
   debug ? false,
-  withCli ? false,
   extraRuntimeDeps ? [],
 }: let
   version = "1.0.0";
 
-  qs = quickshell.withModules [qt6.qtimageformats qt6.qtmultimedia m3shapes];
+  qs = quickshell.withModules [qt6.qtimageformats qt6.qtmultimedia qml-niri m3shapes];
 
   runtimeDeps =
     [
       fish
-      ddcutil
-      brightnessctl
+      niri
+      libnotify
       networkmanager
       lm_sensors
       swappy
       wl-clipboard
       libqalculate
       bash
-      hyprland
     ]
-    ++ extraRuntimeDeps
-    ++ lib.optional withCli caelestia-cli;
+    ++ extraRuntimeDeps;
 
   fontconfig = makeFontsConf {
     fontDirectories = [material-symbols rubik nerd-fonts.caskaydia-cove];
@@ -108,17 +103,17 @@
 in
   stdenv.mkDerivation {
     inherit version cmakeBuildType;
-    pname = "caelestia-shell${lib.optionalString debug "-debug"}";
+    pname = "hel${lib.optionalString debug "-debug"}";
     src = ./..;
 
     nativeBuildInputs = [cmake ninja makeWrapper qt6.wrapQtAppsHook];
-    buildInputs = [qs extras plugin xkeyboard-config qt6.qtbase];
+    buildInputs = [qs extras plugin qt6.qtbase];
     propagatedBuildInputs = runtimeDeps;
 
     cmakeFlags =
       [
         (lib.cmakeFeature "ENABLE_MODULES" "shell")
-        (lib.cmakeFeature "INSTALL_QSCONFDIR" "${placeholder "out"}/share/caelestia-shell")
+        (lib.cmakeFeature "INSTALL_QSCONFDIR" "${placeholder "out"}/share/hel")
       ]
       ++ cmakeVersionFlags;
 
@@ -132,12 +127,11 @@ in
     '';
 
     postInstall = ''
-      makeWrapper ${qs}/bin/qs $out/bin/caelestia-shell \
+      makeWrapper ${qs}/bin/qs $out/bin/hel \
         --prefix PATH : "${lib.makeBinPath runtimeDeps}" \
         --set FONTCONFIG_FILE "${fontconfig}" \
         --set CAELESTIA_LIB_DIR ${extras}/lib \
-        --set CAELESTIA_XKB_RULES_PATH ${xkeyboard-config}/share/xkeyboard-config-2/rules/base.lst \
-        --add-flags "-p $out/share/caelestia-shell"
+        --add-flags "-p $out/share/hel"
 
       mkdir -p $out/lib
       ln -s ${extras}/lib/* $out/lib/
@@ -149,8 +143,8 @@ in
 
     meta = {
       description = "A fluid, morphing shell for your Linux desktop";
-      homepage = "https://github.com/caelestia-dots/shell";
+      homepage = "https://github.com/smoren-brk/hel";
       license = lib.licenses.gpl3Only;
-      mainProgram = "caelestia-shell";
+      mainProgram = "hel";
     };
   }

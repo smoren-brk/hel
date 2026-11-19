@@ -108,12 +108,10 @@ class BarTokens : public settings::ObjectNode {
     CONFIG_NODE(BarTokens, settings::ObjectNode)
 
     CONFIG_PROPERTY(int, innerWidth, 40)
-    CONFIG_PROPERTY(int, windowPreviewSize, 400)
     CONFIG_PROPERTY(int, trayMenuWidth, 300)
     CONFIG_PROPERTY(int, batteryWidth, 250)
     CONFIG_PROPERTY(int, networkWidth, 320)
     CONFIG_PROPERTY(int, audioWidth, 320)
-    CONFIG_PROPERTY(int, kbLayoutWidth, 320)
 };
 
 class DashboardTokens : public settings::ObjectNode {
@@ -124,18 +122,16 @@ class DashboardTokens : public settings::ObjectNode {
     CONFIG_PROPERTY(int, userWidth, 340)
     CONFIG_PROPERTY(int, logoSize, 30)
     CONFIG_PROPERTY(int, uptimeSize, 30)
-    CONFIG_PROPERTY(int, dateTimeWidth, 110)
+    CONFIG_PROPERTY(int, calendarWidth, 300)
     CONFIG_PROPERTY(int, mediaWidth, 200)
     CONFIG_PROPERTY(int, mediaProgressSweep, 180)
     CONFIG_PROPERTY(int, mediaProgressThickness, 6)
-    CONFIG_PROPERTY(int, resourceProgressThickness, 6)
     CONFIG_PROPERTY(int, weatherWidth, 275)
     CONFIG_PROPERTY(int, mediaCoverArtSize, 200)
     CONFIG_PROPERTY(int, mediaTabWidth, 1000)
     CONFIG_PROPERTY(int, mediaTabHeight, 320)
     CONFIG_PROPERTY(int, mediaSectionWidth, 300)
     CONFIG_PROPERTY(int, perfHeroCardWidth, 400)
-    CONFIG_PROPERTY(int, perfUsageShapeSize, 100)
     CONFIG_PROPERTY(int, perfStorageTextWidth, 160)
     CONFIG_PROPERTY(int, perfNetworkCardWidth, 390)
     CONFIG_PROPERTY(int, perfNetworkCardHeight, 220)
@@ -204,13 +200,6 @@ class LockTokens : public settings::ObjectNode {
     CONFIG_PROPERTY(int, showColourBoxRowHeight, 570)
 };
 
-class WInfoTokens : public settings::ObjectNode {
-    CONFIG_NODE(WInfoTokens, settings::ObjectNode)
-
-    CONFIG_PROPERTY(qreal, heightMult, 0.7)
-    CONFIG_PROPERTY(qreal, detailsWidth, 500)
-};
-
 class NexusTokens : public settings::ObjectNode {
     CONFIG_NODE(NexusTokens, settings::ObjectNode)
 
@@ -243,7 +232,6 @@ class SizeTokens : public settings::ObjectNode {
     CONFIG_SUBOBJECT(SidebarTokens, sidebar)
     CONFIG_SUBOBJECT(UtilitiesTokens, utilities)
     CONFIG_SUBOBJECT(LockTokens, lock)
-    CONFIG_SUBOBJECT(WInfoTokens, winfo)
     CONFIG_SUBOBJECT(NexusTokens, nexus)
 };
 

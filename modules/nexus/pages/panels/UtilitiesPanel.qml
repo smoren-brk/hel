@@ -66,13 +66,6 @@ PageBase {
         }
 
         ToggleRow {
-            text: Tr.tr("Screen recorder")
-            subtext: Tr.tr("Show the screen recorder card")
-            checked: Config.utilities.cards.recorder
-            onToggled: GlobalConfig.utilities.cards.recorder = checked
-        }
-
-        ToggleRow {
             last: true
             text: Tr.tr("Quick toggles")
             subtext: Tr.tr("Show the quick toggles card")
@@ -116,14 +109,6 @@ PageBase {
             disabled: !Config.utilities.cards.quickToggles
             checked: root.isToggleOn("settings")
             onToggled: root.setToggleOn("settings", checked)
-        }
-
-        ToggleRow {
-            text: Tr.tr("Game mode")
-            subtext: Tr.tr("Toggle game mode")
-            disabled: !Config.utilities.cards.quickToggles
-            checked: root.isToggleOn("gameMode")
-            onToggled: root.setToggleOn("gameMode", checked)
         }
 
         ToggleRow {

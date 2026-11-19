@@ -85,7 +85,6 @@ Item {
             screen: root.screen
             screenState: root.screenState
             popouts: root.popouts
-            fullscreen: root.fullscreen
         }
     }
 }

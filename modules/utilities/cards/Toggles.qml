@@ -122,14 +122,6 @@ StyledRect {
                     }
                 }
                 DelegateChoice {
-                    roleValue: "gameMode"
-                    delegate: Toggle {
-                        icon: "gamepad"
-                        checked: RuntimeState.gameMode
-                        onClicked: RuntimeState.gameMode = !RuntimeState.gameMode
-                    }
-                }
-                DelegateChoice {
                     roleValue: "wallpaperPlaying"
                     delegate: Toggle {
                         icon: "smart_display"
@@ -161,7 +153,7 @@ StyledRect {
     }
 
     component Toggle: IconButton {
-        inactiveColour: Colours.layer(Colours.palette.m3surfaceContainerHighest, 2)
+        inactiveColour: Colours.palette.m3surfaceContainerHighest
         fillWidth: true
         isToggle: true
         isRound: true

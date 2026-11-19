@@ -12,8 +12,14 @@ namespace caelestia::shell::services {
 using Qt::StringLiterals::operator""_s;
 
 Cpu::Cpu(QObject* parent)
-    : TickingService(parent) {
+    : TickingService(parent)
+    , m_history(new CircularBuffer(this)) {
+    m_history->setCapacity(30);
     readNameOnce();
+}
+
+CircularBuffer* Cpu::history() const {
+    return m_history;
 }
 
 QString Cpu::name() const {
@@ -84,6 +90,12 @@ void Cpu::refreshPercentage() {
         }
     }
 
+    if (m_lastTotal == 0) {
+        m_lastTotal = total;
+        m_lastIdle = idle;
+        return;
+    }
+
     const quint64 totalDiff = total > m_lastTotal ? total - m_lastTotal : 0;
     const quint64 idleDiff = idle > m_lastIdle ? idle - m_lastIdle : 0;
     const qreal newPerc = totalDiff > 0 ? 1.0 - static_cast<qreal>(idleDiff) / static_cast<qreal>(totalDiff) : 0.0;
@@ -91,6 +103,7 @@ void Cpu::refreshPercentage() {
     m_lastTotal = total;
     m_lastIdle = idle;
 
+    m_history->push(newPerc);
     if (std::abs(newPerc - m_percentage) > 0.0001) {
         m_percentage = newPerc;
         emit percentageChanged();

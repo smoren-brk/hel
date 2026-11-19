@@ -9,7 +9,6 @@ import Caelestia
 import Caelestia.Config
 import Caelestia.I18n
 import Caelestia.State
-import qs.components.misc
 import qs.services
 import qs.utils
 
@@ -23,11 +22,7 @@ Singleton {
     property bool loaded
 
     function hasFullscreen(): bool {
-        for (const monitor of Hypr.monitors.values) {
-            if (monitor?.activeWorkspace?.toplevels.values.some(t => t.lastIpcObject.fullscreen > 1))
-                return true;
-        }
-        return false;
+        return Quickshell.screens.some(screen => NiriService.hasFullscreen(screen.name));
     }
 
     function shouldShowPopup(): bool {
@@ -124,27 +119,6 @@ Singleton {
                 root.loaded = true;
                 Qt.callLater(() => setText("[]"));
             }
-        }
-    }
-
-    // qmllint disable unresolved-type
-    CustomShortcut {
-        // qmllint enable unresolved-type
-        name: "clearNotifs"
-        description: "Clear all notifications"
-        onPressed: {
-            for (const notif of root.list.slice())
-                notif.close();
-        }
-    }
-
-    // qmllint disable unresolved-type
-    CustomShortcut {
-        // qmllint enable unresolved-type
-        name: "toggleDnd"
-        description: "Toggle do not disturb"
-        onPressed: {
-            PersistentState.doNotDisturb = !PersistentState.doNotDisturb;
         }
     }
 

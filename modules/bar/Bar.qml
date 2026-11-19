@@ -16,7 +16,6 @@ ColumnLayout {
     required property ShellScreen screen
     required property ScreenState screenState
     required property BarPopouts.Wrapper popouts
-    required property bool fullscreen
     readonly property int vPadding: Tokens.padding.large
 
     function closeTray(): void {
@@ -68,36 +67,29 @@ ColumnLayout {
                 popouts.hasCurrent = false;
                 tray.expanded = true;
             }
-        } else if (id === "activeWindow" && Config.bar.popouts.activeWindow && Config.bar.activeWindow.showOnHover) {
-            popouts.currentName = id.toLowerCase();
-            popouts.currentCenter = (ch.item as Item).mapToItem(root, 0, (ch.item as Item).implicitHeight / 2).y ?? 0;
+        } else if (id === "clock") {
+            popouts.currentName = "calendar";
+            popouts.currentCenter = Qt.binding(() => ch.y + ch.implicitHeight / 2);
             popouts.hasCurrent = true;
+        } else {
+            popouts.hasCurrent = false;
         }
     }
 
     function handleWheel(y: real, angleDelta: point): void {
         const ch = childAt(width / 2, y) as EntryWrapper;
         if (ch?.entryId === "workspaces" && Config.bar.scrollActions.workspaces) {
-            // Workspace scroll
-            const mon = Hypr.monitorFor(screen);
-            const specialWs = mon?.lastIpcObject.specialWorkspace.name;
-            if (specialWs?.length > 0)
-                Hypr.dispatch(Hypr.usingLua ? `hl.dsp.workspace.toggle_special("${specialWs.slice(8)}")` : `togglespecialworkspace ${specialWs.slice(8)}`);
-            else if (angleDelta.y < 0 || mon.activeWorkspace?.id > 1)
-                Hypr.dispatch(Hypr.usingLua ? `hl.dsp.focus({ workspace = "r${angleDelta.y > 0 ? "-" : "+"}1" })` : `workspace r${angleDelta.y > 0 ? "-" : "+"}1`);
+            const workspaces = NiriService.workspacesForOutput(screen.name);
+            const index = workspaces.findIndex(workspace => workspace.isActive);
+            const next = workspaces[index + (angleDelta.y > 0 ? -1 : 1)];
+            if (index >= 0 && angleDelta.y !== 0 && next)
+                NiriService.activateWorkspace(next.id);
         } else if (y < screen.height / 2 && Config.bar.scrollActions.volume) {
             // Volume scroll on top half
             if (angleDelta.y > 0)
                 Audio.incrementVolume();
             else if (angleDelta.y < 0)
                 Audio.decrementVolume();
-        } else if (Config.bar.scrollActions.brightness) {
-            // Brightness scroll on bottom half
-            const monitor = Brightness.getMonitorForScreen(screen);
-            if (angleDelta.y > 0)
-                monitor.setBrightness(monitor.brightness + GlobalConfig.services.brightnessIncrement);
-            else if (angleDelta.y < 0)
-                monitor.setBrightness(monitor.brightness - GlobalConfig.services.brightnessIncrement);
         }
     }
 
@@ -133,7 +125,6 @@ ColumnLayout {
                     Workspaces {
                         objectName: "taskbarWorkspaces"
                         screen: root.screen
-                        fullscreen: root.fullscreen
                     }
                 }
             }
@@ -143,7 +134,6 @@ ColumnLayout {
                     ActiveWindow {
                         objectName: "taskbarActiveWindow"
                         bar: root
-                        monitor: Brightness.getMonitorForScreen(root.screen)
                     }
                 }
             }

@@ -16,7 +16,7 @@ Item {
     readonly property alias shape: shape
 
     property bool hadPrevious
-    property color fallbackColour: Colours.layer(Colours.palette.m3surfaceContainerHighest, 2)
+    property color fallbackColour: Colours.palette.m3surfaceContainerHighest
 
     // Slight glow to separate from bg
     layer.enabled: true

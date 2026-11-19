@@ -20,3 +20,5 @@ There are only a few rules:
 - PR descriptions should be descriptive
     - Please explain what the PR does and how to use it in your PR description
     - Also include any breaking changes and/or side effects of the PR
+
+Build the Nix package with `nix build`. For shell changes, launch `./result/bin/hel` in a Niri session and check the affected panel. For changes to the bar, verify workspace selection on each output and run `python3 scripts/qml-lint-conventions.py`.

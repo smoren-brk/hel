@@ -4,6 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Caelestia.Config
+import Caelestia.State
 import Caelestia.Models
 import qs.services
 import qs.utils
@@ -11,16 +12,12 @@ import qs.utils
 Searcher {
     id: root
 
-    readonly property string currentNamePath: `${Paths.state}/wallpaper/path.txt`
-    readonly property list<string> smartArg: GlobalConfig.services.smartScheme ? [] : ["--no-smart"]
     readonly property string fallback: Quickshell.shellPath("assets/wallpaper.webp")
 
     property bool showPreview: false
     readonly property string current: showPreview ? previewPath : actualCurrent
     property string previewPath
-    property string actualCurrent
-    property bool previewColourLock
-    property bool pendingPreviewClear
+    readonly property string actualCurrent: PersistentState.wallpaperPath || fallback
 
     function getCategoryFor(w: FileSystemEntry): string {
         let category = w.parentDir.slice(Paths.wallsdir.length + 1);
@@ -30,33 +27,21 @@ Searcher {
     }
 
     function setRandom(): void {
-        Quickshell.execDetached(["caelestia", "wallpaper", "-r", ...smartArg]);
+        if (list.length)
+            setWallpaper(list[Math.floor(Math.random() * list.length)].path);
     }
 
     function setWallpaper(path: string): void {
-        actualCurrent = path;
-        Quickshell.execDetached(["caelestia", "wallpaper", "-f", path, ...smartArg]);
+        PersistentState.wallpaperPath = path;
     }
 
     function preview(path: string): void {
         previewPath = path;
         showPreview = true;
-
-        if (Colours.scheme === "dynamic")
-            getPreviewColoursProc.running = true;
     }
 
     function stopPreview(): void {
         showPreview = false;
-        if (previewColourLock)
-            pendingPreviewClear = true;
-        else
-            Colours.showPreview = false;
-    }
-
-    onPreviewColourLockChanged: {
-        if (!previewColourLock && pendingPreviewClear)
-            Colours.showPreview = false;
     }
 
     list: wallpapers.entries
@@ -82,44 +67,11 @@ Searcher {
         target: "wallpaper"
     }
 
-    FileView {
-        path: root.currentNamePath
-        watchChanges: true
-        printErrors: false
-        onFileChanged: reload()
-        onLoaded: {
-            let wall = text().trim();
-            if (!wall) {
-                wall = root.fallback;
-                Quickshell.execDetached(["caelestia", "wallpaper", "-f", root.fallback, ...root.smartArg]);
-            }
-            root.actualCurrent = wall;
-            root.previewColourLock = false;
-        }
-        onLoadFailed: {
-            root.actualCurrent = root.fallback;
-            root.previewColourLock = false;
-            Quickshell.execDetached(["caelestia", "wallpaper", "-f", root.fallback, ...root.smartArg]);
-        }
-    }
-
     FileSystemModel {
         id: wallpapers
 
         recursive: true
         path: Paths.wallsdir
         filter: FileSystemModel.Images | FileSystemModel.Videos
-    }
-
-    Process {
-        id: getPreviewColoursProc
-
-        command: ["caelestia", "wallpaper", "-p", root.previewPath, ...root.smartArg]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                Colours.load(text, true);
-                Colours.showPreview = true;
-            }
-        }
     }
 }

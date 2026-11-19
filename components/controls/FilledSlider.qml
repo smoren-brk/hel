@@ -15,7 +15,7 @@ Slider {
     orientation: Qt.Vertical
 
     background: StyledRect {
-        color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
+        color: Colours.palette.m3surfaceContainer
         radius: Tokens.rounding.full
 
         StyledRect {

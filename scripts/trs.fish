@@ -18,7 +18,7 @@ function gen -a lang
         --no-wrap \
         --add-location=file \
         --add-comments=TRANSLATORS: \
-        --package-name=caelestia-shell \
+        --package-name=hel \
         -k \
         -ktr:1 -ktrCtx:2c,1 -ktrMarked:1 \
         -ktrN:1,2 -ktrCtxN:4c,1,2 \

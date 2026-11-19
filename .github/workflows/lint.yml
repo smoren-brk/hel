@@ -18,23 +18,24 @@ jobs:
     needs: changes
     if: needs.changes.outputs.lint == 'true'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository_owner }}/shell-arch-env:latest
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v7
 
+      - uses: nixbuild/nix-quick-install-action@v34
+
       - name: CMake build
+        shell: nix develop --command bash {0}
         run: |
           # Set version and git rev for CI build so we don't call git
           cmake -B build -G Ninja -DCMAKE_CXX_COMPILER=clazy -DVERSION= -DGIT_REVISION=
           cmake --build build
 
       - name: Lint QML
-        shell: fish {0}
+        shell: nix develop --command fish {0}
         run: |
-          /usr/lib/qt6/bin/qmllint --version
+          qmllint --version
 
           # Generate tooling
           touch .qmlls.ini
@@ -51,7 +52,7 @@ jobs:
 
           # Lint
           set -l lint_out (mktemp)
-          /usr/lib/qt6/bin/qmllint $args $qml_files 2> $lint_out
+          qmllint $args $qml_files 2> $lint_out
 
           set -l singleton_pattern 'Type [A-Z][a-zA-Z0-9]* not declared as singleton in qmldir but using pragma Singleton'
           set -l post_reload_hook_pattern 'PostReloadHook was not found\. Did you add all imports and dependencies\?'
@@ -65,19 +66,21 @@ jobs:
     needs: changes
     if: needs.changes.outputs.lint == 'true'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository_owner }}/shell-arch-env:latest
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v7
 
+      - uses: nixbuild/nix-quick-install-action@v34
+
       - name: CMake build
+        shell: nix develop --command bash {0}
         run: |
           cmake -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
             -DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON -DVERSION= -DGIT_REVISION=
 
       - name: Lint C++
+        shell: nix develop --command bash {0}
         run: |
           clang-tidy --version
           run-clang-tidy -p build -quiet -j "$(nproc)" -warnings-as-errors='*' \
@@ -90,10 +93,12 @@ jobs:
       - lint-qml
       - lint-cpp
     runs-on: ubuntu-latest
-    permissions: {}
+    permissions:
+      contents: read
     steps:
+      - uses: actions/checkout@v7
       - name: Verify lint results
-        uses: $/.github/actions/verify-checks
+        uses: ./.github/actions/verify-checks
         with:
           needs: ${{ toJSON(needs) }}
           checks: |

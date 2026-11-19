@@ -23,16 +23,7 @@ Item {
     Loader {
         asynchronous: true
         anchors.centerIn: parent
-        sourceComponent: SysInfo.isDefaultLogo ? caelestiaLogo : distroIcon
-    }
-
-    Component {
-        id: caelestiaLogo
-
-        Logo {
-            implicitWidth: Math.round(Tokens.font.body.large.pointSize * 1.6)
-            implicitHeight: Math.round(Tokens.font.body.large.pointSize * 1.6)
-        }
+        sourceComponent: distroIcon
     }
 
     Component {

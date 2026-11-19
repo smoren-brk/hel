@@ -17,7 +17,7 @@ Item {
     required property ScreenState screenState
     required property FileDialog facePicker
 
-    property color pfpFallbackColour: Colours.layer(Colours.palette.m3surfaceContainerHighest, 2)
+    property color pfpFallbackColour: Colours.palette.m3surfaceContainerHighest
 
     anchors.fill: parent
     anchors.margins: Tokens.padding.large
@@ -146,7 +146,7 @@ Item {
 
         Loader {
             anchors.centerIn: parent
-            sourceComponent: SysInfo.isDefaultLogo ? caelestiaLogo : osLogo
+            sourceComponent: osLogo
         }
     }
 
@@ -159,17 +159,6 @@ Item {
             source: SysInfo.osLogo
             implicitSize: Tokens.sizes.dashboard.logoSize
             colour: Colours.palette.m3onPrimaryContainer
-        }
-    }
-
-    Component {
-        id: caelestiaLogo
-
-        Logo {
-            implicitWidth: Tokens.sizes.dashboard.logoSize
-            implicitHeight: Tokens.sizes.dashboard.logoSize
-            topColour: Colours.palette.m3primary
-            bottomColour: Colours.palette.m3onPrimaryContainer
         }
     }
 

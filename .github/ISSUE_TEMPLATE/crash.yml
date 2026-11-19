@@ -31,8 +31,8 @@ body:
   - type: textarea
     attributes:
       label: "Version info"
-      description: "Run `caelestia -v` and paste the result below."
-      placeholder: "Paste the output of `caelestia -v` here!"
+      description: "Run `niri --version` and paste the result below."
+      placeholder: "Paste the output of `niri --version` here!"
       render: text
     validations:
       required: true
@@ -41,8 +41,6 @@ body:
     attributes:
       label: Reminder
       options:
-        - label: I've successfully updated to the latest versions following the [updating guide](https://github.com/caelestia-dots/caelestia?tab=readme-ov-file#updating).
-          required: false
         - label: I've successfully updated the system packages to the latest.
           required: false
         - label: I agree that it's usually impossible for others to help me without my logs.

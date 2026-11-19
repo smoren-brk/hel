@@ -33,8 +33,7 @@ CustomMouseArea {
             screenState.dashboardDate = new Date(nonAnimCurrYear, nonAnimCurrMonth + 1, 1);
     }
 
-    anchors.left: parent.left
-    anchors.right: parent.right
+    implicitWidth: Math.max(Tokens.sizes.dashboard.calendarWidth, inner.implicitWidth + inner.anchors.margins * 2)
     implicitHeight: inner.implicitHeight + inner.anchors.margins * 2
 
     acceptedButtons: Qt.MiddleButton
@@ -224,7 +223,7 @@ CustomMouseArea {
             MaterialShape {
                 id: todayIndicator
 
-                readonly property Item todayItem: grid.contentItem.children.find(c => c.model.today) ?? null
+                readonly property Item todayItem: grid.contentItem.children.find(c => c.model?.today) ?? null
                 property Item today
 
                 onTodayItemChanged: {

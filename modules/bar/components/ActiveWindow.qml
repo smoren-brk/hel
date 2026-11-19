@@ -11,11 +11,10 @@ Item {
     id: root
 
     required property var bar
-    required property Brightness.Monitor monitor
     property color colour: Colours.palette.m3primary
 
     readonly property string windowTitle: {
-        const title = Hypr.activeToplevel?.title;
+        const title = NiriService.focusedWindow?.title;
         if (!title)
             return Tr.trCtx("Desktop", "shown when no window is focused");
         if (Config.bar.activeWindow.compact) {
@@ -39,39 +38,13 @@ Item {
     implicitWidth: Math.max(icon.implicitWidth, current.implicitHeight)
     implicitHeight: icon.implicitHeight + current.implicitWidth + current.anchors.topMargin
 
-    Loader {
-        asynchronous: true
-        anchors.fill: parent
-        active: !Config.bar.activeWindow.showOnHover
-
-        sourceComponent: MouseArea {
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-            onPositionChanged: {
-                const popouts = root.bar.popouts;
-                if (popouts.hasCurrent && popouts.currentName !== "activewindow")
-                    popouts.hasCurrent = false;
-            }
-            onClicked: {
-                const popouts = root.bar.popouts;
-                if (popouts.hasCurrent) {
-                    popouts.hasCurrent = false;
-                } else {
-                    popouts.currentName = "activewindow";
-                    popouts.currentCenter = root.mapToItem(root.bar, 0, root.implicitHeight / 2).y;
-                    popouts.hasCurrent = true;
-                }
-            }
-        }
-    }
-
     MaterialIcon {
         id: icon
 
         anchors.horizontalCenter: parent.horizontalCenter
 
         animate: true
-        text: Icons.getAppCategoryIcon(Hypr.activeToplevel?.lastIpcObject.class, "desktop_windows")
+        text: Icons.getAppCategoryIcon(NiriService.focusedWindow?.appId ?? "", "desktop_windows")
         color: root.colour
     }
 

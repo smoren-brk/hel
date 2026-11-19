@@ -8,7 +8,6 @@ import qs.services
 Switch {
     id: root
 
-    property int cLayer: 1
     property bool disabled
 
     enabled: !disabled
@@ -21,7 +20,7 @@ Switch {
         color: {
             if (root.disabled)
                 return root.checked ? Qt.alpha(Colours.palette.m3onSurface, 0.12) : Qt.alpha(Colours.palette.m3surfaceContainerHighest, 0.38);
-            return root.checked ? Colours.palette.m3primary : Colours.layer(Colours.palette.m3surfaceContainerHighest, root.cLayer);
+            return root.checked ? Colours.palette.m3primary : Colours.palette.m3surfaceContainerHighest;
         }
 
         implicitWidth: implicitHeight * 1.7
@@ -34,7 +33,7 @@ Switch {
             color: {
                 if (root.disabled)
                     return root.checked ? Colours.palette.m3surface : Qt.alpha(Colours.palette.m3onSurface, 0.12);
-                return root.checked ? Colours.palette.m3onPrimary : Colours.layer(Colours.palette.m3outline, root.cLayer + 1);
+                return root.checked ? Colours.palette.m3onPrimary : Colours.palette.m3outline;
             }
 
             x: root.checked ? parent.implicitWidth - nonAnimWidth - Tokens.padding.extraSmall / 2 : Tokens.padding.extraSmall / 2

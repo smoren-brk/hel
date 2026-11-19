@@ -17,29 +17,6 @@ StyledRect {
 
     readonly property int spacing: Tokens.spacing.medium / 2
 
-    // Index of the first/last entry that isn't collapsed, for edge margin gating
-    readonly property int firstPresent: {
-        const values = model.values;
-        for (let i = 0; i < values.length; i++)
-            if (!collapsed(values[i]))
-                return i;
-        return -1;
-    }
-    readonly property int lastPresent: {
-        const values = model.values;
-        for (let i = values.length - 1; i >= 0; i--)
-            if (!collapsed(values[i]))
-                return i;
-        return -1;
-    }
-
-    // Entries that can shrink to nothing, spacing included
-    function collapsed(entry: var): bool {
-        if (entry.id === "lockStatus")
-            return !Hypr.capsLock && !Hypr.numLock;
-        return false;
-    }
-
     color: Colours.tPalette.m3surfaceContainer
     radius: Tokens.rounding.full
 
@@ -68,11 +45,11 @@ StyledRect {
                 role: "id"
 
                 DelegateChoice {
-                    roleValue: "lockStatus"
+                    roleValue: "kbLayout"
                     delegate: EntryWrapper {
-                        LockStatus {
-                            colour: root.colour
-                            parentSpacing: root.spacing
+                        MaterialIcon {
+                            text: "keyboard"
+                            color: root.colour
                         }
                     }
                 }
@@ -102,17 +79,6 @@ StyledRect {
                             color: root.colour
                             fontStyle: Tokens.font.icon.medium
                             fill: 1
-                        }
-                    }
-                }
-                DelegateChoice {
-                    roleValue: "kbLayout"
-                    delegate: EntryWrapper {
-                        StyledText {
-                            animate: true
-                            text: Hypr.kbLayout
-                            color: root.colour
-                            font: Tokens.font.mono.medium
                         }
                     }
                 }
@@ -150,9 +116,8 @@ StyledRect {
         required property var modelData
         required property int index
         property int margin: root.spacing / 2
-        readonly property bool present: !root.collapsed(modelData)
-        property real topGap: present && index !== root.firstPresent ? margin : 0
-        property real bottomGap: present && index !== root.lastPresent ? margin : 0
+        property real topGap: index > 0 ? margin : 0
+        property real bottomGap: index < model.values.length - 1 ? margin : 0
         default property Item item
         property string name: modelData.id.toLowerCase()
 

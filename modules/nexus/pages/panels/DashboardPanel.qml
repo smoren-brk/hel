@@ -32,18 +32,11 @@ PageBase {
         }
 
         ToggleRow {
+            last: true
             text: Tr.tr("Show on hover")
             subtext: Tr.tr("Reveal when the cursor reaches the screen edge")
             checked: Config.dashboard.showOnHover
             onToggled: GlobalConfig.dashboard.showOnHover = checked
-        }
-
-        ToggleRow {
-            last: true
-            text: Tr.tr("Show clock seconds")
-            subtext: Tr.tr("Display seconds for the clock in the main panel")
-            checked: Config.dashboard.showClockSeconds
-            onToggled: GlobalConfig.dashboard.showClockSeconds = checked
         }
 
         // Tabs
@@ -90,21 +83,15 @@ PageBase {
         }
 
         ToggleRow {
-            text: Tr.tr("GPU")
-            checked: Config.dashboard.performance.showGpu
-            onToggled: GlobalConfig.dashboard.performance.showGpu = checked
-        }
-
-        ToggleRow {
             text: Tr.tr("CPU")
             checked: Config.dashboard.performance.showCpu
             onToggled: GlobalConfig.dashboard.performance.showCpu = checked
         }
 
         ToggleRow {
-            text: Tr.tr("Memory")
-            checked: Config.dashboard.performance.showMemory
-            onToggled: GlobalConfig.dashboard.performance.showMemory = checked
+            text: Tr.tr("GPU")
+            checked: Config.dashboard.performance.showGpu
+            onToggled: GlobalConfig.dashboard.performance.showGpu = checked
         }
 
         ToggleRow {

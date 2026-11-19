@@ -4,7 +4,6 @@ import QtQuick
 import Caelestia.Config
 import Caelestia.I18n
 import qs.components
-import qs.services
 import qs.modules.lock
 
 Item {
@@ -68,33 +67,6 @@ Item {
         return "";
     }
 
-    readonly property string stateMsg: {
-        if (Hypr.kbLayout !== Hypr.defaultKbLayout) {
-            if (Hypr.capsLock && Hypr.numLock)
-                // TRANSLATORS: %1 = the active keyboard layout name, e.g. "English (US)"
-                return Tr.tr("Caps lock and Num lock are ON.\nKeyboard layout: %1").arg(Hypr.kbLayoutFull);
-            if (Hypr.capsLock)
-                // TRANSLATORS: %1 = the active keyboard layout name, e.g. "English (US)"
-                return Tr.tr("Caps lock is ON. Keyboard layout: %1").arg(Hypr.kbLayoutFull);
-            if (Hypr.numLock)
-                // TRANSLATORS: %1 = the active keyboard layout name, e.g. "English (US)"
-                return Tr.tr("Num lock is ON. Keyboard layout: %1").arg(Hypr.kbLayoutFull);
-            // TRANSLATORS: %1 = the active keyboard layout name, e.g. "English (US)"
-            return Tr.tr("Keyboard layout: %1").arg(Hypr.kbLayoutFull);
-        }
-
-        if (Hypr.capsLock && Hypr.numLock)
-            return Tr.tr("Caps lock and Num lock are ON.");
-        if (Hypr.capsLock)
-            return Tr.tr("Caps lock is ON.");
-        if (Hypr.numLock)
-            return Tr.tr("Num lock is ON.");
-
-        return "";
-    }
-
-    property bool stateMsgShouldBeVisible
-
     onMsgChanged: {
         if (msg) {
             if (message.opacity > 0) {
@@ -119,51 +91,10 @@ Item {
         }
     }
 
-    onStateMsgChanged: {
-        if (stateMsg) {
-            if (stateMessage.opacity > 0) {
-                stateMessage.animate = true;
-                stateMessage.text = stateMsg;
-                stateMessage.animate = false;
-            } else {
-                stateMessage.text = stateMsg;
-            }
-            stateMsgShouldBeVisible = true;
-        } else {
-            stateMsgShouldBeVisible = false;
-        }
-    }
-
-    implicitHeight: Math.max(message.implicitHeight, stateMessage.implicitHeight)
+    implicitHeight: message.implicitHeight
 
     Behavior on implicitHeight {
         Anim {}
-    }
-
-    StyledText {
-        id: stateMessage
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        scale: root.stateMsgShouldBeVisible && !root.msg ? 1 : 0.7
-        opacity: root.stateMsgShouldBeVisible && !root.msg ? 1 : 0
-        color: Colours.palette.m3onSurfaceVariant
-
-        font: Tokens.font.body.small
-        horizontalAlignment: Qt.AlignHCenter
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        lineHeight: 1.2
-
-        Behavior on scale {
-            Anim {}
-        }
-
-        Behavior on opacity {
-            Anim {
-                type: Anim.DefaultEffects
-            }
-        }
     }
 
     StyledText {

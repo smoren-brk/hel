@@ -140,7 +140,9 @@ constexpr int k_firstGenericSource = 1;
 } // namespace
 
 Gpu::Gpu(QObject* parent)
-    : TickingService(parent) {
+    : TickingService(parent)
+    , m_history(new CircularBuffer(this)) {
+    m_history->setCapacity(30);
     m_busyFiles = gpuBusyFiles();
 
     const auto* svc = caelestia::shell::config::ConfigSingleton::instance()->services();
@@ -159,6 +161,10 @@ Gpu::Gpu(QObject* parent)
 
 GpuType Gpu::type() const {
     return m_type;
+}
+
+CircularBuffer* Gpu::history() const {
+    return m_history;
 }
 
 QString Gpu::name() const {
@@ -181,6 +187,7 @@ void Gpu::setType(GpuType value) {
     if (value == m_type) {
         return;
     }
+    m_history->clear();
     m_type = value;
     if (m_type == GpuType::None) {
         resetUsage();
@@ -322,7 +329,12 @@ void Gpu::readGenericUsage() {
             ++count;
         }
     }
-    const qreal newPerc = count > 0 ? sum / count / 100.0 : 0.0;
+    if (!count) {
+        m_history->clear();
+        return;
+    }
+    const qreal newPerc = sum / count / 100.0;
+    m_history->push(newPerc);
     if (std::abs(newPerc - m_percentage) > 0.0001) {
         m_percentage = newPerc;
         emit percentageChanged();
@@ -345,14 +357,20 @@ void Gpu::startNvidiaUsage() {
                 return;
             }
 
-            const QList<QByteArray> parts = out.trimmed().split(',');
+            const QList<QByteArray> parts = out.trimmed().split('\n').value(0).split(',');
             if (parts.size() < 2) {
+                resetUsage();
                 return;
             }
             bool ok1 = false;
             bool ok2 = false;
             const qreal usage = parts.at(0).trimmed().toDouble(&ok1) / 100.0;
             const qreal temp = parts.at(1).trimmed().toDouble(&ok2);
+            if (ok1) {
+                m_history->push(usage);
+            } else {
+                m_history->clear();
+            }
             if (ok1 && std::abs(usage - m_percentage) > 0.0001) {
                 m_percentage = usage;
                 emit percentageChanged();
@@ -374,6 +392,7 @@ void Gpu::readGpuTemperature() {
 }
 
 void Gpu::resetUsage() {
+    m_history->clear();
     if (std::abs(m_percentage) > 0.0001) {
         m_percentage = 0.0;
         emit percentageChanged();

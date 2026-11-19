@@ -135,12 +135,6 @@ PageBase {
         }
 
         ToggleRow {
-            text: Tr.tr("Game mode changes")
-            checked: GlobalConfig.utilities.toasts.gameModeChanged
-            onToggled: GlobalConfig.utilities.toasts.gameModeChanged = checked
-        }
-
-        ToggleRow {
             text: Tr.tr("Do not disturb changes")
             checked: GlobalConfig.utilities.toasts.dndChanged
             onToggled: GlobalConfig.utilities.toasts.dndChanged = checked
@@ -156,24 +150,6 @@ PageBase {
             text: Tr.tr("Audio input changes")
             checked: GlobalConfig.utilities.toasts.audioInputChanged
             onToggled: GlobalConfig.utilities.toasts.audioInputChanged = checked
-        }
-
-        ToggleRow {
-            text: Tr.tr("Caps lock changes")
-            checked: GlobalConfig.utilities.toasts.capsLockChanged
-            onToggled: GlobalConfig.utilities.toasts.capsLockChanged = checked
-        }
-
-        ToggleRow {
-            text: Tr.tr("Num lock changes")
-            checked: GlobalConfig.utilities.toasts.numLockChanged
-            onToggled: GlobalConfig.utilities.toasts.numLockChanged = checked
-        }
-
-        ToggleRow {
-            text: Tr.tr("Keyboard layout changes")
-            checked: GlobalConfig.utilities.toasts.kbLayoutChanged
-            onToggled: GlobalConfig.utilities.toasts.kbLayoutChanged = checked
         }
 
         ToggleRow {
