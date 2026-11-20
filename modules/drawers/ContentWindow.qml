@@ -202,6 +202,8 @@ StyledWindow {
             deformAmount: panels.popouts.isDetached ? 0.05 : panels.popouts.hasCurrent ? 0.15 : 0.1
             x: panels.popoutsWrapper.x + panels.popouts.x + bar.implicitWidth - panels.popouts.width * extraWidth
             implicitWidth: panels.popouts.width * (1 + extraWidth)
+            topLeftRadius: panels.popouts.isDetached ? radius : 0
+            bottomLeftRadius: panels.popouts.isDetached ? radius : 0
 
             Behavior on extraWidth {
                 Anim {}
@@ -303,7 +305,7 @@ StyledWindow {
         y: panel.y + root.borderThickness
         implicitWidth: panel.width
         implicitHeight: panel.height
-        radius: Tokens.rounding.extraLarge
+        radius: Config.border.panelRounding
         deformScale: (deformAmount * Config.appearance.deformScale) / 10000
     }
 }
