@@ -25,7 +25,7 @@ PageBase {
         NavRow {
             icon: "dock_to_bottom"
             text: Tr.tr("Taskbar")
-            subtext: Config.bar.persistent ? Tr.tr("Always visible") : Config.bar.showOnHover ? Tr.tr("Reveal on hover") : Tr.tr("Reveal on drag")
+            subtext: Config.bar.persistent ? Tr.tr("Always visible") : Config.bar.showOnHover ? Tr.tr("Reveal on hover") : Tr.tr("Always hidden")
             onClicked: root.nState.openSubPage(2)
         }
 
