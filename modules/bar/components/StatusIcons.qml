@@ -56,14 +56,12 @@ StyledRect {
                 DelegateChoice {
                     roleValue: "audio"
                     delegate: EntryWrapper {
-                        margin: Tokens.spacing.extraSmall / 2
+                        name: "volume"
 
                         MaterialIcon {
                             animate: true
                             text: Icons.getVolumeIcon(Audio.volume, Audio.muted)
                             color: root.colour
-                            fontStyle: Tokens.font.icon.builders.medium.scale(0.85).build()
-                            fill: 1
                         }
                     }
                 }

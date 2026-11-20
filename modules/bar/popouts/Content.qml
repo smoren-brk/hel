@@ -127,6 +127,11 @@ Item {
         }
 
         Popout {
+            name: "volume"
+            sourceComponent: Volume {}
+        }
+
+        Popout {
             name: "audio"
             sourceComponent: AudioPopout {
                 popouts: root.popouts

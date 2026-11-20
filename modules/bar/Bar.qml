@@ -162,14 +162,6 @@ ColumnLayout {
                 }
             }
             DelegateChoice {
-                roleValue: "volume"
-                delegate: EntryWrapper {
-                    VolumeSlider {
-                        objectName: "taskbarVolume"
-                    }
-                }
-            }
-            DelegateChoice {
                 roleValue: "power"
                 delegate: EntryWrapper {
                     Power {

@@ -89,7 +89,7 @@ class BarConfig : public settings::ObjectNode {
     CONFIG_SUBOBJECT(BarClock, clock)
     CONFIG_LIST(EntryList, statusIcons,
         DEFAULT_ARG({
-            LIST_ENTRY(audio, false),
+            LIST_ENTRY(audio, true),
             LIST_ENTRY(microphone, false),
             LIST_ENTRY(kbLayout, false),
             LIST_ENTRY(network, true),
@@ -106,7 +106,6 @@ class BarConfig : public settings::ObjectNode {
             LIST_ENTRY(tray, true),
             LIST_ENTRY(clock, true),
             LIST_ENTRY(statusIcons, true),
-            LIST_ENTRY(volume, true),
             LIST_ENTRY(power, true),
         }))
     CONFIG_PROPERTY(QStringList, excludedScreens, {})

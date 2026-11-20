@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Hel.Config
 import qs.components
@@ -8,8 +10,8 @@ import qs.utils
 Item {
     id: root
 
-    implicitWidth: Tokens.sizes.bar.innerWidth
-    implicitHeight: Tokens.sizes.bar.innerWidth * 3
+    implicitWidth: Tokens.sizes.osd.sliderWidth
+    implicitHeight: Tokens.sizes.osd.sliderHeight
 
     CustomMouseArea {
         function onWheel(event: WheelEvent): void {
