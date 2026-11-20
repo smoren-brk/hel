@@ -31,15 +31,15 @@ The bar mode is cycled with `hel ipc call bar cycle` through always shown, revea
 
 ## Configuration
 
-Open settings with `hel ipc call nexus open`. Existing shell settings use `~/.config/hel/shell.json`. An output-specific override goes in `~/.config/hel/monitors/DP-1/shell.json`, replacing `DP-1` with an output name from `niri msg outputs`. For example, this pins the bar on that display.
+Open settings with `hel ipc call nexus open`. Existing shell settings use `~/.config/hel/shell.json`. An output-specific override goes in `~/.config/hel/monitors/DP-1/shell.json`, replacing `DP-1` with an output name from `niri msg outputs`. For example, this makes the bar reveal on hover on that display.
 
 ```json
 {
-  "bar": { "persistent": true }
+  "bar": { "persistent": false }
 }
 ```
 
-The bar starts in hover mode and the dashboard opens from its key binding rather than on hover.
+The bar is always visible by default, and the dashboard opens from its key binding rather than on hover.
 
 Hel uses opaque Carbonfox panels. Hover over the bar clock to open the calendar. The dashboard shows Novi Sad weather in Celsius by default. Its Performance tab shows CPU and supported GPU usage histories, current percentages, and available sensor temperatures. Disk usage appears on the Performance tab.
 

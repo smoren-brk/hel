@@ -106,7 +106,7 @@ StyledRect {
                 anchors.bottomMargin: Config.bar.tray.background ? Tokens.padding.extraSmall : -Tokens.padding.small
                 text: "expand_less"
                 color: Colours.palette.m3onSurfaceVariant
-                fontStyle: Tokens.font.icon.builders.medium.scale(0.9).build()
+                fontStyle: Tokens.font.icon.builders.medium.scale(0.85).build()
                 rotation: root.expanded ? 180 : 0
 
                 Behavior on rotation {

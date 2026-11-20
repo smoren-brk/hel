@@ -8,8 +8,8 @@ import qs.utils
 Item {
     id: root
 
-    implicitWidth: Math.round(Tokens.font.body.large.pointSize * 1.05)
-    implicitHeight: Math.round(Tokens.font.body.large.pointSize * 1.05)
+    implicitWidth: Math.round(Tokens.font.body.large.pointSize * 1.0)
+    implicitHeight: Math.round(Tokens.font.body.large.pointSize * 1.0)
 
     MouseArea {
         anchors.fill: parent
@@ -31,7 +31,7 @@ Item {
 
         ColouredIcon {
             source: SysInfo.osLogo
-            implicitSize: Math.round(Tokens.font.body.large.pointSize * 1.05)
+            implicitSize: Math.round(Tokens.font.body.large.pointSize * 1.0)
             colour: Colours.palette.m3tertiary
         }
     }

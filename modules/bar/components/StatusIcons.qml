@@ -62,7 +62,7 @@ StyledRect {
                             animate: true
                             text: Icons.getVolumeIcon(Audio.volume, Audio.muted)
                             color: root.colour
-                            fontStyle: Tokens.font.icon.builders.medium.scale(0.9).build()
+                            fontStyle: Tokens.font.icon.builders.medium.scale(0.85).build()
                             fill: 1
                         }
                     }
@@ -77,7 +77,7 @@ StyledRect {
                             animate: true
                             text: Icons.getMicVolumeIcon(Audio.sourceVolume, Audio.sourceMuted)
                             color: root.colour
-                            fontStyle: Tokens.font.icon.builders.medium.scale(0.9).build()
+                            fontStyle: Tokens.font.icon.builders.medium.scale(0.85).build()
                             fill: 1
                         }
                     }

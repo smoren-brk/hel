@@ -38,7 +38,7 @@ Column {
                 StyledText {
                     anchors.horizontalCenter: labels.horizontalCenter
                     text: entry.modelData.index
-                    font: root.Tokens.font.body.builders.small.scale(0.95).build()
+                    font: root.Tokens.font.body.builders.small.scale(0.9).build()
                     color: entry.modelData.isActive ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
                 }
 
@@ -50,7 +50,7 @@ Column {
 
                         anchors.horizontalCenter: labels.horizontalCenter
                         text: Icons.getAppCategoryIcon(modelData.appId, "desktop_windows")
-                        fontStyle: root.Tokens.font.icon.builders.small.scale(0.85).build()
+                        fontStyle: root.Tokens.font.icon.builders.small.scale(0.8).build()
                         color: entry.modelData.isActive ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
                     }
                 }

@@ -13,8 +13,8 @@ MouseArea {
     required property SystemTrayItem modelData
 
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    implicitWidth: Math.round(Tokens.font.body.small.pointSize * 1.8)
-    implicitHeight: Math.round(Tokens.font.body.small.pointSize * 1.8)
+    implicitWidth: Math.round(Tokens.font.body.small.pointSize * 1.7)
+    implicitHeight: Math.round(Tokens.font.body.small.pointSize * 1.7)
 
     onClicked: event => {
         if (event.button === Qt.LeftButton)
