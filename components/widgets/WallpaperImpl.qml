@@ -1,9 +1,9 @@
 import QtQuick
-import Caelestia
-import Caelestia.Config
-import Caelestia.Multimedia
-import Caelestia.Shaders
-import Caelestia.State
+import Hel
+import Hel.Config
+import Hel.Multimedia
+import Hel.Shaders
+import Hel.State
 import qs.services
 
 Item {

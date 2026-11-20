@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import Caelestia
-import Caelestia.Components
-import Caelestia.Config
+import Hel
+import Hel.Components
+import Hel.Config
 import qs.components
 import qs.services
 import qs.utils

@@ -1,0 +1,35 @@
+qml_module(hel-services
+    URI Hel.Services
+    SOURCES
+        service.cpp
+        serviceref.cpp
+        beattracker.cpp
+        audiocollector.cpp
+        audioprovider.cpp
+        cavaprovider.cpp
+        tickingservice.cpp
+        sensorslib.cpp
+        cpu.cpp
+        gpu.cpp
+        memory.cpp
+        diskinfo.cpp
+        storage.cpp
+        lyriccandidate.cpp
+        lyrics.cpp
+        sessionmanager.cpp
+        networkusage.cpp
+    LIBRARIES
+        Qt::Concurrent
+        Qt::DBus
+        Qt::Network
+        PkgConfig::Pipewire
+        PkgConfig::Aubio
+        PkgConfig::Cava
+        Sensors::Sensors
+        hel-util
+        hel-core
+        hel-config
+    DEPENDENCIES
+        Hel
+        Hel.Config
+)

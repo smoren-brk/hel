@@ -3,16 +3,16 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Caelestia.Config
-import Caelestia.State
-import Caelestia.Models
+import Hel.Config
+import Hel.State
+import Hel.Models
 import qs.services
 import qs.utils
 
 Searcher {
     id: root
 
-    readonly property string fallback: Quickshell.env("CAELESTIA_WALLPAPER") || Quickshell.shellPath("assets/wallpaper.webp")
+    readonly property string fallback: Quickshell.env("HEL_WALLPAPER") || Quickshell.shellPath("assets/wallpaper.webp")
 
     property bool showPreview: false
     readonly property string current: showPreview ? previewPath : actualCurrent

@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Caelestia
-import Caelestia.Config
+import Hel
+import Hel.Config
 import qs.components
 import qs.services
 import qs.modules.drawers

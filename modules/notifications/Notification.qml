@@ -4,8 +4,8 @@ import QtQuick
 import QtQuick.Shapes
 import Quickshell
 import Quickshell.Services.Notifications
-import Caelestia.Components
-import Caelestia.Config
+import Hel.Components
+import Hel.Config
 import qs.components
 import qs.components.controls
 import qs.components.effects

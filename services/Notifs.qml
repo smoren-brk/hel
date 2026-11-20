@@ -5,10 +5,10 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
-import Caelestia
-import Caelestia.Config
-import Caelestia.I18n
-import Caelestia.State
+import Hel
+import Hel.Config
+import Hel.I18n
+import Hel.State
 import qs.services
 import qs.utils
 

@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import Caelestia.Config
-import Caelestia.I18n
-import Caelestia.State
+import Hel.Config
+import Hel.I18n
+import Hel.State
 import qs.components
 import qs.components.controls
 import qs.services

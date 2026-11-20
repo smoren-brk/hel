@@ -3,9 +3,9 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Caelestia
-import Caelestia.Config
-import Caelestia.I18n
+import Hel
+import Hel.Config
+import Hel.I18n
 
 Singleton {
     id: root
@@ -812,7 +812,7 @@ Singleton {
     LoggingCategory {
         id: lc
 
-        name: "caelestia.qml.services.vpn"
+        name: "hel.qml.services.vpn"
         defaultLogLevel: LoggingCategory.Info
     }
 

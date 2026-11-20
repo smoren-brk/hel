@@ -1,5 +1,5 @@
 import QtQuick
-import Caelestia.Components
+import Hel.Components
 
 Item {
     id: root

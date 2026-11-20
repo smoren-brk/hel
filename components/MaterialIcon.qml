@@ -1,5 +1,5 @@
 import QtQuick
-import Caelestia.Config
+import Hel.Config
 import qs.services
 
 StyledText {

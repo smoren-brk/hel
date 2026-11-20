@@ -65,7 +65,7 @@
 
   extras = stdenv.mkDerivation {
     inherit cmakeBuildType;
-    name = "caelestia-extras${lib.optionalString debug "-debug"}";
+    name = "hel-extras${lib.optionalString debug "-debug"}";
     src = lib.fileset.toSource {
       root = ./..;
       fileset = lib.fileset.union ./../CMakeLists.txt ./../extras;
@@ -83,7 +83,7 @@
 
   plugin = stdenv.mkDerivation {
     inherit cmakeBuildType;
-    name = "caelestia-qml-plugin${lib.optionalString debug "-debug"}";
+    name = "hel-qml-plugin${lib.optionalString debug "-debug"}";
     src = lib.fileset.toSource {
       root = ./..;
       fileset = lib.fileset.union ./../CMakeLists.txt ./../plugin;
@@ -130,7 +130,7 @@ in
       makeWrapper ${qs}/bin/qs $out/bin/hel \
         --prefix PATH : "${lib.makeBinPath runtimeDeps}" \
         --set FONTCONFIG_FILE "${fontconfig}" \
-        --set CAELESTIA_LIB_DIR ${extras}/lib \
+        --set HEL_LIB_DIR ${extras}/lib \
         --add-flags "-p $out/share/hel"
 
       mkdir -p $out/lib

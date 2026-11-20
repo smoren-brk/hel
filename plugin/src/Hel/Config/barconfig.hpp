@@ -1,0 +1,114 @@
+#pragma once
+
+#include <qstring.h>
+#include <qstringlist.h>
+#include <qvariantlist.h>
+
+#include "settings/objectnode.hpp"
+#include "common.hpp"
+#include "enums.hpp"
+
+namespace hel::shell::config {
+
+using Qt::StringLiterals::operator""_s;
+using settings::vmap;
+
+class BarScrollActions : public settings::ObjectNode {
+    CONFIG_NODE(BarScrollActions, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, workspaces, true)
+    CONFIG_PROPERTY(bool, volume, true)
+};
+
+class BarPopouts : public settings::ObjectNode {
+    CONFIG_NODE(BarPopouts, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, tray, true)
+    CONFIG_PROPERTY(bool, statusIcons, true)
+};
+
+class BarWorkspaces : public settings::ObjectNode {
+    CONFIG_NODE(BarWorkspaces, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, showWindows, true)
+    CONFIG_PROPERTY(int, maxWindowIcons, 5)
+    CONFIG_PROPERTY(bool, showUnoccupied, true)
+    CONFIG_GLOBAL_LIST(IconRuleList, windowIcons,
+        DEFAULT_ARG({
+            ICON_RULE_REGEX("steam(_app_(default|[0-9]+))?", "sports_esports"),
+        }))
+};
+
+class BarActiveWindow : public settings::ObjectNode {
+    CONFIG_NODE(BarActiveWindow, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, compact, false)
+    CONFIG_PROPERTY(bool, inverted, false)
+};
+
+class BarTrayIconSub : public settings::ObjectNode {
+    CONFIG_NODE(BarTrayIconSub, settings::ObjectNode)
+
+    CONFIG_PROPERTY(QString, id, {})
+    CONFIG_PROPERTY(QString, icon, {})
+    CONFIG_PROPERTY(QString, image, {})
+};
+CONFIG_LIST_TYPE(BarTrayIconSub, BarTrayIconSubList)
+
+class BarTray : public settings::ObjectNode {
+    CONFIG_NODE(BarTray, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, background, false)
+    CONFIG_PROPERTY(bool, recolour, false)
+    CONFIG_PROPERTY(bool, compact, false)
+    CONFIG_GLOBAL_LIST(BarTrayIconSubList, iconSubs, {})
+    CONFIG_GLOBAL_PROPERTY(QStringList, hiddenIcons, {})
+};
+
+class BarClock : public settings::ObjectNode {
+    CONFIG_NODE(BarClock, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, background, false)
+    CONFIG_PROPERTY(bool, showDate, false)
+    CONFIG_PROPERTY(bool, showIcon, true)
+    CONFIG_PROPERTY(bool, showSeconds, false)
+};
+
+class BarConfig : public settings::ObjectNode {
+    CONFIG_NODE(BarConfig, settings::ObjectNode)
+
+    CONFIG_PROPERTY(bool, persistent, false)
+    CONFIG_PROPERTY(bool, showOnHover, true)
+    CONFIG_PROPERTY(bool, onlyOnMainScreen, true)
+    CONFIG_PROPERTY(int, dragThreshold, 20)
+    CONFIG_SUBOBJECT(BarScrollActions, scrollActions)
+    CONFIG_SUBOBJECT(BarPopouts, popouts)
+    CONFIG_SUBOBJECT(BarWorkspaces, workspaces)
+    CONFIG_SUBOBJECT(BarActiveWindow, activeWindow)
+    CONFIG_SUBOBJECT(BarTray, tray)
+    CONFIG_SUBOBJECT(BarClock, clock)
+    CONFIG_LIST(EntryList, statusIcons,
+        DEFAULT_ARG({
+            LIST_ENTRY(audio, false),
+            LIST_ENTRY(microphone, false),
+            LIST_ENTRY(kbLayout, false),
+            LIST_ENTRY(network, true),
+            LIST_ENTRY(bluetooth, true),
+            LIST_ENTRY(battery, true),
+        }))
+    CONFIG_LIST(EntryList, entries,
+        DEFAULT_ARG({
+            LIST_ENTRY(logo, true),
+            LIST_ENTRY(workspaces, true),
+            LIST_ENTRY(spacer, true),
+            LIST_ENTRY(activeWindow, true),
+            LIST_ENTRY(spacer, true),
+            LIST_ENTRY(tray, true),
+            LIST_ENTRY(clock, true),
+            LIST_ENTRY(statusIcons, true),
+            LIST_ENTRY(power, true),
+        }))
+    CONFIG_PROPERTY(QStringList, excludedScreens, {})
+};
+
+} // namespace hel::shell::config

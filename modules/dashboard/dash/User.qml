@@ -2,9 +2,9 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import M3Shapes
-import Caelestia.Config
-import Caelestia.I18n
-import Caelestia.Multimedia
+import Hel.Config
+import Hel.I18n
+import Hel.Multimedia
 import qs.components
 import qs.components.effects
 import qs.components.filedialog

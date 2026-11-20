@@ -2,9 +2,9 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
-import Caelestia
-import Caelestia.Config
-import Caelestia.I18n
+import Hel
+import Hel.Config
+import Hel.I18n
 import qs.components
 import qs.components.filedialog
 import qs.utils

@@ -6,7 +6,7 @@
 
 import QtQuick
 import Quickshell
-import Caelestia.Config
+import Hel.Config
 import qs.services
 import qs.modules.areapicker
 import qs.modules.background

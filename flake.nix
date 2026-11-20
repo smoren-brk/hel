@@ -26,7 +26,7 @@
     nixpkgs,
     ...
   } @ inputs: let
-    inherit (nixpkgs.lib) genAttrs platforms modules lists systems;
+    inherit (nixpkgs.lib) genAttrs platforms lists systems;
 
     pkgsOf = nixpkgs.legacyPackages;
     systems' = lists.intersectLists platforms.linux systems.flakeExposed;
@@ -63,7 +63,5 @@
           packages = with pkgs; [clazy clang-tools python3 qt6.qtdeclarative material-symbols rubik nerd-fonts.caskaydia-cove];
         };
     });
-
-    homeManagerModules.default = modules.importApply ./nix/hm-module.nix self;
   };
 }

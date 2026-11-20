@@ -3,10 +3,10 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Caelestia.Components
-import Caelestia.Config
-import Caelestia.I18n
-import Caelestia.Models
+import Hel.Components
+import Hel.Config
+import Hel.I18n
+import Hel.Models
 import qs.components
 import qs.components.controls
 import qs.components.filedialog
