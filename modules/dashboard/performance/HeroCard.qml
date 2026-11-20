@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Hel
 import Hel.Components
 import Hel.Config
+import Hel.I18n
 import qs.components
 import qs.services
 import qs.utils
