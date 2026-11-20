@@ -41,7 +41,7 @@ Open settings with `hel ipc call nexus open`. Existing shell settings use `~/.co
 
 The bar is always visible by default, and the dashboard opens from its key binding rather than on hover.
 
-Hel uses opaque Carbonfox panels. Hover over the bar clock to open the calendar. The dashboard shows Novi Sad weather in Celsius by default. Its Performance tab shows CPU and supported GPU usage histories, current percentages, and available sensor temperatures. Disk usage appears on the Performance tab.
+Hel uses opaque Carbonfox panels. Hover over the bar clock to open the calendar. The dashboard shows Novi Sad weather in Celsius by default.
 
 The launcher reads wallpapers from `~/Pictures/Wallpapers` by default. Set `paths.wallpaperDir` to change the directory. Set `HEL_WALLPAPER` to a file path to override the fallback wallpaper. Type `>wallpaper` in the launcher or run `hel ipc call wallpaper set /absolute/path/to/image`. Hel saves the selection between sessions. The dashboard reads the profile picture from `~/.face`.
 

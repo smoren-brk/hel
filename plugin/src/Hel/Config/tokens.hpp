@@ -131,14 +131,6 @@ class DashboardTokens : public settings::ObjectNode {
     CONFIG_PROPERTY(int, mediaTabWidth, 1000)
     CONFIG_PROPERTY(int, mediaTabHeight, 320)
     CONFIG_PROPERTY(int, mediaSectionWidth, 300)
-    CONFIG_PROPERTY(int, perfHeroCardWidth, 400)
-    CONFIG_PROPERTY(int, perfStorageTextWidth, 160)
-    CONFIG_PROPERTY(int, perfNetworkCardWidth, 390)
-    CONFIG_PROPERTY(int, perfNetworkCardHeight, 220)
-    CONFIG_PROPERTY(int, perfBattWidth, 150)
-    CONFIG_PROPERTY(int, perfBattWidthSingle, 400)
-    CONFIG_PROPERTY(int, perfBattHeight, 160)
-    CONFIG_PROPERTY(int, perfPlaceholderWidth, 700)
 };
 
 class LauncherTokens : public settings::ObjectNode {

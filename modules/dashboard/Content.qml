@@ -30,12 +30,6 @@ Item {
                 enabled: Config.dashboard.showMedia
             },
             {
-                component: performanceComponent,
-                iconName: "speed",
-                text: Tr.tr("Performance"),
-                enabled: Config.dashboard.showPerformance
-            },
-            {
                 component: weatherComponent,
                 iconName: "cloud",
                 text: Tr.tr("Weather"),
@@ -172,12 +166,6 @@ Item {
                 Media {
                     screenState: root.screenState
                 }
-            }
-
-            Component {
-                id: performanceComponent
-
-                Performance {}
             }
 
             Component {
