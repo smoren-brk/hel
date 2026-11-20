@@ -10,8 +10,8 @@ class BorderConfig : public settings::ObjectNode {
 
     CONFIG_PROPERTY(int, thickness, 0)
     CONFIG_PROPERTY(int, rounding, 25)
-    // Free floating panel corners, kept in sync with niri's geometry-corner-radius
-    CONFIG_PROPERTY(int, panelRounding, 10)
+    // Floating panel corners; square by default, only the bar keeps its rounding
+    CONFIG_PROPERTY(int, panelRounding, 0)
     CONFIG_PROPERTY(int, smoothing, 20)
 
     Q_PROPERTY(int minThickness READ minThickness CONSTANT)
