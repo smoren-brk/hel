@@ -14,12 +14,10 @@ Item {
     required property bool sidebarOrSessionVisible
 
     property bool hovered
-    readonly property bool shouldBeActive: screenState.osd && Config.osd.enabled && !(screenState.utilities && Config.utilities.enabled)
+    readonly property bool shouldBeActive: screenState.osd && Config.osd.enabled && Config.osd.enableMicrophone && !(screenState.utilities && Config.utilities.enabled)
     property real offsetScale: shouldBeActive ? 0 : 1
     property real sidebarOffset: sidebarOrSessionVisible ? 12 : 0
 
-    property real volume
-    property bool muted
     property real sourceVolume
     property bool sourceMuted
 
@@ -29,8 +27,6 @@ Item {
     }
 
     Component.onCompleted: {
-        volume = Audio.volume;
-        muted = Audio.muted;
         sourceVolume = Audio.sourceVolume;
         sourceMuted = Audio.sourceMuted;
     }
@@ -46,16 +42,6 @@ Item {
     }
 
     Connections {
-        function onMutedChanged(): void {
-            root.show();
-            root.muted = Audio.muted;
-        }
-
-        function onVolumeChanged(): void {
-            root.show();
-            root.volume = Audio.volume;
-        }
-
         function onSourceMutedChanged(): void {
             root.show();
             root.sourceMuted = Audio.sourceMuted;
@@ -89,8 +75,6 @@ Item {
         active: root.shouldBeActive || root.visible
 
         sourceComponent: Content {
-            volume: root.volume
-            muted: root.muted
             sourceVolume: root.sourceVolume
             sourceMuted: root.sourceMuted
         }

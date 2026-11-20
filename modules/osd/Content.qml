@@ -12,8 +12,6 @@ import qs.utils
 Item {
     id: root
 
-    required property real volume
-    required property bool muted
     required property real sourceVolume
     required property bool sourceMuted
 
@@ -26,28 +24,6 @@ Item {
         anchors.centerIn: parent
         anchors.horizontalCenterOffset: CUtils.clamp(Tokens.padding.large - Config.border.thickness, 0, Tokens.padding.large) / 2
         spacing: Tokens.spacing.medium
-
-        // Speaker volume
-        CustomMouseArea {
-            function onWheel(event: WheelEvent) {
-                if (event.angleDelta.y > 0)
-                    Audio.incrementVolume();
-                else if (event.angleDelta.y < 0)
-                    Audio.decrementVolume();
-            }
-
-            implicitWidth: Tokens.sizes.osd.sliderWidth
-            implicitHeight: Tokens.sizes.osd.sliderHeight
-
-            FilledSlider {
-                anchors.fill: parent
-
-                icon: Icons.getVolumeIcon(value, root.muted)
-                value: root.volume
-                to: GlobalConfig.services.maxVolume
-                onMoved: Audio.setVolume(value)
-            }
-        }
 
         // Microphone volume
         WrappedLoader {
