@@ -9,8 +9,8 @@ class BorderConfig : public settings::ObjectNode {
     CONFIG_NODE(BorderConfig, settings::ObjectNode)
 
     CONFIG_PROPERTY(int, thickness, 0)
-    CONFIG_PROPERTY(int, rounding, 25)
-    // Floating panel corners; square by default, only the bar keeps its rounding
+    CONFIG_PROPERTY(int, rounding, 0)
+    // Floating panel corners
     CONFIG_PROPERTY(int, panelRounding, 0)
     CONFIG_PROPERTY(int, smoothing, 20)
 
