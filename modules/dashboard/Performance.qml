@@ -75,7 +75,6 @@ Item {
                         icon: "memory"
                         label: Tr.tr("CPU")
                         subLabel: Cpu.name
-                        history: Cpu.history
                         usage: Cpu.percentage
                         temperature: Cpu.temperature
                         accent: Colours.palette.m3primary
@@ -95,7 +94,6 @@ Item {
                         icon: "desktop_windows"
                         label: Tr.tr("GPU")
                         subLabel: Gpu.name || (Gpu.detecting ? Tr.tr("Detecting GPU...") : Tr.trCtx("None", "GPU name"))
-                        history: Gpu.history
                         usage: Gpu.percentage
                         temperature: Gpu.temperature
                         accent: Colours.palette.m3secondary

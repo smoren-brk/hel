@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Hel.Components
 import Hel.Config
 import Hel.I18n
 import Hel.Services
@@ -14,7 +13,7 @@ StyledRect {
     radius: Tokens.rounding.extraLarge
 
     implicitWidth: Tokens.sizes.dashboard.perfNetworkCardWidth
-    implicitHeight: Tokens.sizes.dashboard.perfNetworkCardHeight
+    implicitHeight: layout.implicitHeight + Tokens.padding.large + Tokens.padding.medium
 
     ServiceRef {
         service: NetworkUsage
@@ -40,64 +39,6 @@ StyledRect {
             StyledText {
                 text: Tr.tr("Network")
                 font: Tokens.font.title.medium
-            }
-        }
-
-        // Sparkline graph
-        Item {
-            Layout.topMargin: Tokens.spacing.medium
-            Layout.bottomMargin: Tokens.spacing.small
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            SparklineItem {
-                id: sparkline
-
-                property real targetMax: 1024
-                property real smoothMax: targetMax
-
-                anchors.fill: parent
-                line1: NetworkUsage.uploadBuffer
-                line1Color: Colours.palette.m3secondary
-                line1FillAlpha: 0.15
-                line2: NetworkUsage.downloadBuffer
-                line2Color: Colours.palette.m3tertiary
-                line2FillAlpha: 0.2
-                maxValue: smoothMax
-                historyLength: NetworkUsage.historyLength
-
-                Connections {
-                    function onValuesChanged(): void {
-                        sparkline.targetMax = Math.max(NetworkUsage.downloadBuffer.maximum, NetworkUsage.uploadBuffer.maximum, 1024);
-                        slideAnim.restart();
-                    }
-
-                    target: NetworkUsage.downloadBuffer
-                }
-
-                NumberAnimation {
-                    id: slideAnim
-
-                    target: sparkline
-                    property: "slideProgress"
-                    from: 0
-                    to: 1
-                    easing.type: Easing.Linear
-                    duration: GlobalConfig.dashboard.resourceUpdateInterval
-                }
-
-                Behavior on smoothMax {
-                    Anim {}
-                }
-            }
-
-            // "Collecting data" placeholder
-            StyledText {
-                anchors.centerIn: parent
-                text: Tr.tr("Collecting data...")
-                font: Tokens.font.body.small
-                color: Colours.palette.m3outline
-                visible: NetworkUsage.downloadBuffer.count < 2
             }
         }
 

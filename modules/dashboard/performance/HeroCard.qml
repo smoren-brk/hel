@@ -1,7 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Hel
-import Hel.Components
 import Hel.Config
 import Hel.I18n
 import qs.components
@@ -15,7 +13,6 @@ StyledRect {
     required property string label
     required property string subLabel
     required property color accent
-    required property CircularBuffer history
     required property real usage
     required property real temperature
 
@@ -47,7 +44,7 @@ StyledRect {
             }
 
             StyledText {
-                text: root.history.count ? Strings.percentOne(root.usage) : "—"
+                text: isNaN(root.usage) ? "—" : Strings.percentOne(root.usage)
                 color: root.accent
                 font: Tokens.font.title.medium
             }
@@ -59,18 +56,6 @@ StyledRect {
             font: Tokens.font.body.small
             color: Colours.palette.m3onSurfaceVariant
             elide: Text.ElideRight
-        }
-
-        SparklineItem {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.preferredHeight: Tokens.sizes.dashboard.perfHeroCardWidth / 8
-            line1: root.history
-            line1Color: root.accent
-            line1FillAlpha: 0.15
-            maxValue: 1
-            historyLength: root.history.capacity
-            slideProgress: 1
         }
 
         RowLayout {
