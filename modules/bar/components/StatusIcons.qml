@@ -17,7 +17,7 @@ StyledRect {
 
     readonly property int spacing: Tokens.spacing.medium / 2
 
-    color: Colours.tPalette.m3surfaceContainer
+    color: Colours.palette.m3surfaceContainer
     radius: Tokens.rounding.full
 
     clip: true
@@ -94,6 +94,14 @@ StyledRect {
                     roleValue: "bluetooth"
                     delegate: EntryWrapper {
                         BluetoothStatus {
+                            colour: root.colour
+                        }
+                    }
+                }
+                DelegateChoice {
+                    roleValue: "keepAwake"
+                    delegate: EntryWrapper {
+                        KeepAwakeStatus {
                             colour: root.colour
                         }
                     }

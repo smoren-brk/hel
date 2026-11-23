@@ -106,7 +106,7 @@ MouseArea {
         StyledRect {
             anchors.fill: parent
             radius: parent.radius
-            color: Colours.palette.m3surfaceContainerLow
+            color: Colours.palette.m3surfaceContainer
 
             ColumnLayout {
                 id: column
@@ -116,14 +116,11 @@ MouseArea {
                 spacing: 0
 
                 Repeater {
-                    id: repeater
-
                     model: root.items
 
                     StyledRect {
                         id: item
 
-                        required property int index
                         required property MenuItem modelData
                         readonly property bool active: modelData === root?.active
 
@@ -131,25 +128,11 @@ MouseArea {
                         implicitWidth: menuOptionRow.implicitWidth + Tokens.padding.medium * 2
                         implicitHeight: menuOptionRow.implicitHeight + Tokens.padding.medium * 2
 
-                        radius: active ? Tokens.rounding.medium : Tokens.rounding.extraSmall
-                        topLeftRadius: index === 0 ? Tokens.rounding.medium : radius
-                        topRightRadius: index === 0 ? Tokens.rounding.medium : radius
-                        bottomLeftRadius: index === repeater?.count - 1 ? Tokens.rounding.medium : radius
-                        bottomRightRadius: index === repeater?.count - 1 ? Tokens.rounding.medium : radius
-
-                        color: Qt.alpha(Colours.palette.m3tertiaryContainer, active ? 1 : 0)
-
-                        Behavior on radius {
-                            Anim {}
-                        }
+                        radius: Tokens.rounding.medium
+                        color: Qt.alpha(Colours.palette.m3secondaryContainer, active ? 1 : 0)
 
                         StateLayer {
-                            topLeftRadius: parent.topLeftRadius
-                            topRightRadius: parent.topRightRadius
-                            bottomLeftRadius: parent.bottomLeftRadius
-                            bottomRightRadius: parent.bottomRightRadius
-
-                            color: item.active ? Colours.palette.m3onTertiaryContainer : Colours.palette.m3onSurface
+                            color: item.active ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
                             disabled: !root.expanded
                             onClicked: {
                                 root.itemSelected(item.modelData);
@@ -169,14 +152,14 @@ MouseArea {
                             MaterialIcon {
                                 Layout.alignment: Qt.AlignVCenter
                                 text: item.modelData?.icon ?? ""
-                                color: item.active ? Colours.palette.m3onTertiaryContainer : Colours.palette.m3onSurfaceVariant
+                                color: item.active ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurfaceVariant
                             }
 
                             StyledText {
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.fillWidth: true
                                 text: item.modelData?.text ?? ""
-                                color: item.active ? Colours.palette.m3onTertiaryContainer : Colours.palette.m3onSurface
+                                color: item.active ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
                             }
 
                             Loader {
@@ -187,7 +170,7 @@ MouseArea {
 
                                 sourceComponent: MaterialIcon {
                                     text: item.modelData.trailingIcon
-                                    color: item.active ? Colours.palette.m3onTertiaryContainer : Colours.palette.m3onSurfaceVariant
+                                    color: item.active ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurfaceVariant
                                 }
                             }
                         }

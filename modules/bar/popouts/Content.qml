@@ -99,14 +99,17 @@ Item {
 
         Popout {
             name: "bluetooth"
-            sourceComponent: Bluetooth {
-                popouts: root.popouts
-            }
+            sourceComponent: Bluetooth {}
         }
 
         Popout {
             name: "battery"
             sourceComponent: Battery {}
+        }
+
+        Popout {
+            name: "keepawake"
+            sourceComponent: KeepAwakePopup {}
         }
 
         Popout {
@@ -133,9 +136,7 @@ Item {
 
         Popout {
             name: "audio"
-            sourceComponent: AudioPopout {
-                popouts: root.popouts
-            }
+            sourceComponent: AudioPopout {}
         }
 
         Repeater {

@@ -64,7 +64,7 @@ Item {
 
             visible: root.bgEnabled
             anchors.fill: parent
-            radius: Tokens.rounding.extraLarge * root.clockScale
+            radius: Tokens.rounding.large
             opacity: Config.background.desktopClock.background.opacity
             color: Colours.palette.m3surface
 

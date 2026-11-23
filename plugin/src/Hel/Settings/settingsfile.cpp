@@ -73,9 +73,10 @@ void SettingsFile::onFileChanged() {
 }
 
 void SettingsFile::onDirChanged() {
-    // Ignore if the file is already watched
+    // The file may have been replaced by a symlink or atomically renamed, e.g. by Nix.
+    // Drop the old watch so initWatcher() re-arms it on the new target, then reload.
     if (m_watcher->files().contains(m_path))
-        return;
+        m_watcher->removePath(m_path);
 
     initWatcher();
 

@@ -12,7 +12,7 @@ Item {
     required property real borderThickness
 
     readonly property alias content: content
-    property real offsetScale: x > 0 || content.hasCurrent ? 0 : 1
+    property real offsetScale: content.hasCurrent ? 0 : 1
 
     visible: width > 0 && height > 0
     clip: true
@@ -20,11 +20,8 @@ Item {
     implicitWidth: content.implicitWidth * (1 - offsetScale)
     implicitHeight: content.implicitHeight
 
-    x: content.isDetached ? (parent.width - content.nonAnimWidth) / 2 : 0
+    x: 0
     y: {
-        if (content.isDetached)
-            return (parent.height - content.nonAnimHeight) / 2;
-
         const off = content.currentCenter - borderThickness - content.nonAnimHeight / 2;
         const diff = parent.height - Math.floor(off + content.nonAnimHeight);
         if (diff < 0)
@@ -34,13 +31,6 @@ Item {
 
     Behavior on offsetScale {
         Anim {}
-    }
-
-    Behavior on x {
-        Anim {
-            duration: content.animLength
-            easing: content.animCurve
-        }
     }
 
     Behavior on y {

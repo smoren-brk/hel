@@ -130,7 +130,6 @@ in
       makeWrapper ${qs}/bin/qs $out/bin/hel \
         --prefix PATH : "${lib.makeBinPath runtimeDeps}" \
         --set FONTCONFIG_FILE "${fontconfig}" \
-        --set HEL_LIB_DIR ${extras}/lib \
         --add-flags "-p $out/share/hel"
 
       mkdir -p $out/lib

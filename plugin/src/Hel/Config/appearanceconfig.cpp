@@ -59,10 +59,6 @@ int AppearanceRounding::extraLargeIncreased() const {
     return m_tokens ? static_cast<int>(m_tokens->extraLargeIncreased() * m_scale) : 0;
 }
 
-int AppearanceRounding::extraExtraLarge() const {
-    return m_tokens ? static_cast<int>(m_tokens->extraExtraLarge() * m_scale) : 0;
-}
-
 int AppearanceRounding::full() const {
     return m_tokens ? m_tokens->full() : 0;
 }
@@ -139,10 +135,6 @@ int AppearancePadding::extraLarge() const {
 
 int AppearancePadding::extraLargeIncreased() const {
     return m_tokens ? static_cast<int>(m_tokens->extraLargeIncreased() * m_scale) : 0;
-}
-
-int AppearancePadding::extraExtraLarge() const {
-    return m_tokens ? static_cast<int>(m_tokens->extraExtraLarge() * m_scale) : 0;
 }
 
 // AnimDurations

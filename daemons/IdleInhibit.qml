@@ -2,22 +2,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import Hel.State
+import qs.services
 
 Scope {
-    id: root
-
-    Connections {
-        function onInhibitIdleChanged(): void {
-            if (RuntimeState.inhibitIdle)
-                RuntimeState.inhibitingIdleSince = new Date().getTime();
-        }
-
-        target: RuntimeState
-    }
-
     IdleInhibitor {
-        enabled: RuntimeState.inhibitIdle
+        enabled: KeepAwake.enabled
+
         window: PanelWindow {
             implicitWidth: 0
             implicitHeight: 0
@@ -28,19 +18,19 @@ Scope {
 
     IpcHandler {
         function isEnabled(): bool {
-            return RuntimeState.inhibitIdle;
+            return KeepAwake.enabled;
         }
 
         function toggle(): void {
-            RuntimeState.inhibitIdle = !RuntimeState.inhibitIdle;
+            KeepAwake.toggle();
         }
 
         function enable(): void {
-            RuntimeState.inhibitIdle = true;
+            KeepAwake.setEnabled(true);
         }
 
         function disable(): void {
-            RuntimeState.inhibitIdle = false;
+            KeepAwake.setEnabled(false);
         }
 
         target: "idleInhibitor"

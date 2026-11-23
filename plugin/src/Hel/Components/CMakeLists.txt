@@ -1,13 +1,10 @@
 qml_module(hel-components
     URI Hel.Components
     SOURCES
-        animatedrepeater.cpp
         lazylistview.cpp
         wavyline.cpp
         buttonrow.cpp
         circularindicatormanager.cpp
-        linearindicatormanager.cpp
-        sparklineitem.cpp
         visualiserbars.cpp
         roundedmask.cpp
     LIBRARIES

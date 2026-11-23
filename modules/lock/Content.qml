@@ -48,9 +48,9 @@ RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            bottomRightRadius: Tokens.rounding.extraLarge
-            radius: Tokens.rounding.medium
-            color: Colours.tPalette.m3surfaceContainer
+            bottomRightRadius: Tokens.rounding.large
+            radius: Tokens.rounding.large
+            color: Colours.palette.m3surfaceContainer
 
             NotifDock {
                 lock: root.lock

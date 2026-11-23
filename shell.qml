@@ -6,7 +6,6 @@
 
 import QtQuick
 import Quickshell
-import Hel.Config
 import qs.services
 import qs.modules.areapicker
 import qs.modules.background
@@ -24,9 +23,6 @@ ShellRoot {
         Notifs;
         Players;
         Weather.reload();
-
-        if (GlobalConfig.utilities.vpn.enabled)
-            VPN;
     }
 
     FontLoader {

@@ -21,7 +21,7 @@ StyledRect {
     }
     implicitHeight: input.implicitHeight + Tokens.padding.small
 
-    color: Colours.tPalette.m3surfaceContainer
+    color: Colours.palette.m3surfaceContainer
     radius: Tokens.rounding.full
 
     focus: true

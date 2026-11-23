@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import Hel.Config
 import qs.components
-import qs.services
 
 ButtonBase {
     id: root
@@ -16,25 +15,6 @@ ButtonBase {
 
     horizontalPadding: Tokens.padding.medium
     verticalPadding: Tokens.padding.small
-
-    activeColour: type === TextButton.Filled ? Colours.palette.m3primary : Colours.palette.m3secondary
-    inactiveColour: {
-        if (!isToggle && type === TextButton.Filled)
-            return Colours.palette.m3primary;
-        return type === TextButton.Filled ? Colours.tPalette.m3surfaceContainer : Colours.palette.m3secondaryContainer;
-    }
-    activeOnColour: {
-        if (type === TextButton.Text)
-            return Colours.palette.m3primary;
-        return type === TextButton.Filled ? Colours.palette.m3onPrimary : Colours.palette.m3onSecondary;
-    }
-    inactiveOnColour: {
-        if (!isToggle && type === TextButton.Filled)
-            return Colours.palette.m3onPrimary;
-        if (type === TextButton.Text)
-            return Colours.palette.m3primary;
-        return type === TextButton.Filled ? Colours.palette.m3onSurface : Colours.palette.m3onSecondaryContainer;
-    }
 
     implicitWidth: row.implicitWidth + horizontalPadding * 2
     implicitHeight: row.implicitHeight + verticalPadding * 2

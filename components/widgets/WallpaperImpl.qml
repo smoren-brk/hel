@@ -3,7 +3,6 @@ import Hel
 import Hel.Config
 import Hel.Multimedia
 import Hel.Shaders
-import Hel.State
 import qs.services
 
 Item {
@@ -86,7 +85,7 @@ Item {
         id: live
 
         anchors.fill: parent
-        playing: PersistentState.wallpaperPlaying
+        playing: true
         animate: false
         layer.enabled: true
 

@@ -13,8 +13,4 @@ Singleton {
     function isMain(screen: ShellScreen): bool {
         return screen === main;
     }
-
-    function isExcluded(screen: ShellScreen): bool {
-        return !GlobalConfig.forScreen(screen.name).enabled;
-    }
 }

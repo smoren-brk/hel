@@ -29,7 +29,6 @@ class AppearanceRounding : public settings::ObjectNode {
     Q_PROPERTY(int largeIncreased READ largeIncreased NOTIFY valuesChanged)
     Q_PROPERTY(int extraLarge READ extraLarge NOTIFY valuesChanged)
     Q_PROPERTY(int extraLargeIncreased READ extraLargeIncreased NOTIFY valuesChanged)
-    Q_PROPERTY(int extraExtraLarge READ extraExtraLarge NOTIFY valuesChanged)
     Q_PROPERTY(int full READ full NOTIFY valuesChanged)
 
 public:
@@ -42,7 +41,6 @@ public:
     [[nodiscard]] int largeIncreased() const;
     [[nodiscard]] int extraLarge() const;
     [[nodiscard]] int extraLargeIncreased() const;
-    [[nodiscard]] int extraExtraLarge() const;
     [[nodiscard]] int full() const;
 
 signals:
@@ -97,7 +95,6 @@ class AppearancePadding : public settings::ObjectNode {
     Q_PROPERTY(int largeIncreased READ largeIncreased NOTIFY valuesChanged)
     Q_PROPERTY(int extraLarge READ extraLarge NOTIFY valuesChanged)
     Q_PROPERTY(int extraLargeIncreased READ extraLargeIncreased NOTIFY valuesChanged)
-    Q_PROPERTY(int extraExtraLarge READ extraExtraLarge NOTIFY valuesChanged)
 
 public:
     void bindTokens(PaddingTokens* tokens);
@@ -109,7 +106,6 @@ public:
     [[nodiscard]] int largeIncreased() const;
     [[nodiscard]] int extraLarge() const;
     [[nodiscard]] int extraLargeIncreased() const;
-    [[nodiscard]] int extraExtraLarge() const;
 
 signals:
     void valuesChanged();

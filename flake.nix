@@ -31,8 +31,14 @@
     pkgsOf = nixpkgs.legacyPackages;
     systems' = lists.intersectLists platforms.linux systems.flakeExposed;
     eachSystem = genAttrs systems';
+    helModule = import ./nix/nixos-module.nix {inherit self;};
   in {
     formatter = eachSystem (system: pkgsOf.${system}.alejandra);
+
+    nixosModules = {
+      default = helModule;
+      hel = helModule;
+    };
 
     packages = eachSystem (system: let
       pkgs = pkgsOf.${system};

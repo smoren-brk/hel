@@ -22,7 +22,6 @@ class Config : public QQuickAttachedPropertyPropagator, public QQmlParserStatus 
     Q_PROPERTY(const hel::shell::config::DashboardConfig* dashboard READ dashboard NOTIFY sourceChanged)
     Q_PROPERTY(const hel::shell::config::LauncherConfig* launcher READ launcher NOTIFY sourceChanged)
     Q_PROPERTY(const hel::shell::config::LockConfig* lock READ lock NOTIFY sourceChanged)
-    Q_PROPERTY(const hel::shell::config::NexusConfig* nexus READ nexus NOTIFY sourceChanged)
     Q_PROPERTY(const hel::shell::config::NotifsConfig* notifs READ notifs NOTIFY sourceChanged)
     Q_PROPERTY(const hel::shell::config::OsdConfig* osd READ osd NOTIFY sourceChanged)
     Q_PROPERTY(const hel::shell::config::ServiceConfig* services READ services NOTIFY sourceChanged)
@@ -45,7 +44,6 @@ public:
     [[nodiscard]] const DashboardConfig* dashboard() const;
     [[nodiscard]] const LauncherConfig* launcher() const;
     [[nodiscard]] const LockConfig* lock() const;
-    [[nodiscard]] const NexusConfig* nexus() const;
     [[nodiscard]] const NotifsConfig* notifs() const;
     [[nodiscard]] const OsdConfig* osd() const;
     [[nodiscard]] const ServiceConfig* services() const;

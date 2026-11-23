@@ -22,7 +22,7 @@ Item {
 
     StyledRect {
         anchors.fill: parent
-        color: Colours.tPalette.m3surfaceContainer
+        color: Colours.palette.m3surfaceContainer
 
         layer.enabled: true
         layer.effect: Mask {
@@ -166,7 +166,7 @@ Item {
         implicitHeight: nonAnimHeight
 
         radius: Tokens.rounding.large
-        color: Qt.alpha(Colours.tPalette.m3surfaceContainerHighest, GridView.isCurrentItem ? Colours.tPalette.m3surfaceContainerHighest.a : 0)
+        color: Qt.alpha(Colours.palette.m3surfaceContainerHighest, GridView.isCurrentItem ? Colours.palette.m3surfaceContainerHighest.a : 0)
         z: GridView.isCurrentItem || implicitHeight !== nonAnimHeight ? 1 : 0
         clip: true
 

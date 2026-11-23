@@ -50,7 +50,7 @@ StyledRect {
 
     clip: true
     radius: Tokens.rounding.large
-    color: root.urgency === "critical" ? Colours.palette.m3secondaryContainer : Colours.palette.m3surfaceContainerHigh
+    color: root.urgency === "critical" ? Colours.palette.m3secondaryContainer : Colours.palette.m3surfaceContainer
 
     RowLayout {
         id: content

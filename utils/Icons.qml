@@ -140,13 +140,6 @@ Singleton {
         return "";
     }
 
-    function getAppIcon(name: string, fallback: string): string {
-        const icon = DesktopEntries.heuristicLookup(name)?.icon;
-        if (fallback !== "undefined")
-            return Quickshell.iconPath(icon, fallback);
-        return Quickshell.iconPath(icon);
-    }
-
     function getAppCategoryIcon(name: string, fallback: string): string {
         const match = matchIconRuleList(name, GlobalConfig.bar.workspaces.windowIcons);
         if (match)

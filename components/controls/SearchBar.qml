@@ -24,7 +24,7 @@ TextFieldBase {
         id: bg
 
         anchors.fill: parent
-        color: Colours.tPalette.m3surfaceContainer
+        color: Colours.palette.m3surfaceContainer
         radius: Tokens.rounding.full
 
         StateLayer {

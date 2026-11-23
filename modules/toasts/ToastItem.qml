@@ -24,7 +24,7 @@ StyledRect {
             return Colours.palette.m3secondary;
         if (root.modelData.type === Toast.Error)
             return Colours.palette.m3errorContainer;
-        return Colours.palette.m3surface;
+        return Colours.palette.m3surfaceContainer;
     }
 
     border.width: 1

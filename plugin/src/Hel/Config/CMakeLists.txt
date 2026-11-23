@@ -18,7 +18,6 @@ qml_module(hel-config
         generalconfig.hpp
         launcherconfig.hpp
         lockconfig.hpp
-        nexusconfig.hpp
         notifsconfig.hpp
         osdconfig.hpp
         serviceconfig.hpp

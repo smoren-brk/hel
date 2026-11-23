@@ -3,8 +3,9 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
+import Hel.Config
 import Hel.I18n
-import qs.components
 import qs.services
 
 LazyLoader {
@@ -53,7 +54,7 @@ LazyLoader {
         implicitHeight: 600
         minimumSize.width: 400
         minimumSize.height: 300
-        color: Colours.tPalette.m3surface
+        color: "transparent"
         surfaceFormat.opaque: false
         title: loader.title
 
@@ -62,45 +63,48 @@ LazyLoader {
                 rejected();
         }
 
-        RowLayout {
+        ClippingRectangle {
             anchors.fill: parent
 
-            spacing: 0
+            radius: Tokens.rounding.large
+            color: Colours.palette.m3surface
 
-            Sidebar {
-                Layout.fillHeight: true
-                dialog: root
-            }
-
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+            RowLayout {
+                anchors.fill: parent
 
                 spacing: 0
 
-                HeaderBar {
-                    Layout.fillWidth: true
-                    dialog: root
-                }
-
-                FolderContents {
-                    id: folderContents
-
-                    Layout.fillWidth: true
+                Sidebar {
                     Layout.fillHeight: true
                     dialog: root
                 }
 
-                DialogButtons {
+                ColumnLayout {
                     Layout.fillWidth: true
-                    dialog: root
-                    folder: folderContents
+                    Layout.fillHeight: true
+
+                    spacing: 0
+
+                    HeaderBar {
+                        Layout.fillWidth: true
+                        dialog: root
+                    }
+
+                    FolderContents {
+                        id: folderContents
+
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        dialog: root
+                    }
+
+                    DialogButtons {
+                        Layout.fillWidth: true
+                        dialog: root
+                        folder: folderContents
+                    }
                 }
             }
-        }
-
-        Behavior on color {
-            CAnim {}
         }
     }
 }

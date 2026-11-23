@@ -21,7 +21,6 @@ CustomMouseArea {
     property point dragStart
     property bool dashboardShortcutActive
     property bool osdShortcutActive
-    property bool utilitiesShortcutActive
     property bool sidebarShortcutActive
 
     function withinPanelHeight(panel: Item, x: real, y: real): bool {
@@ -76,15 +75,12 @@ CustomMouseArea {
             if (!dashboardShortcutActive)
                 screenState.dashboard = false;
 
-            if (!utilitiesShortcutActive)
-                screenState.utilities = false;
-
             if (!popouts.currentName.startsWith("traymenu") || ((popouts.current as StackView)?.depth ?? 0) <= 1) {
                 popouts.hasCurrent = false;
                 bar.closeTray();
             }
 
-            if (Config.bar.showOnHover)
+            if (bar.showOnHover)
                 bar.isHovered = false;
 
             if (Config.sidebar.showOnHover && !sidebarShortcutActive)
@@ -93,9 +89,6 @@ CustomMouseArea {
     }
 
     onPositionChanged: event => {
-        if (popouts.isDetached)
-            return;
-
         const x = event.x;
         const y = event.y;
         const dragX = x - dragStart.x;
@@ -107,11 +100,11 @@ CustomMouseArea {
         }
 
         // Show bar in non-exclusive mode on hover
-        if (!screenState.bar && Config.bar.showOnHover && x < bar.clampedWidth)
+        if (!screenState.bar && bar.showOnHover && x < bar.clampedWidth)
             bar.isHovered = true;
 
         // Show/hide bar on drag (only when the bar is allowed to hover in)
-        if (pressed && Config.bar.showOnHover && !bar.disabled && dragStart.x < bar.clampedWidth) {
+        if (pressed && bar.showOnHover && !bar.disabled && dragStart.x < bar.clampedWidth) {
             if (dragX > Config.bar.dragThreshold)
                 screenState.bar = true;
             else if (dragX < -Config.bar.dragThreshold)
@@ -186,7 +179,7 @@ CustomMouseArea {
                 if (showSidebarHover && !screenState.sidebar) {
                     screenState.sidebar = true;
                 } else if (!sidebarShortcutActive) {
-                    const inSidebarArea = inRightPanel(panels.sidebar, x, y) || inRightPanel(panels.sessionWrapper, x, y) || inRightPanel(panels.utilities, x, y);
+                    const inSidebarArea = inRightPanel(panels.sidebar, x, y) || inRightPanel(panels.sessionWrapper, x, y);
                     if (!inSidebarArea)
                         screenState.sidebar = false;
                 } else if (showSidebarHover) {
@@ -230,17 +223,6 @@ CustomMouseArea {
                 screenState.dashboard = false;
         }
 
-        // Show utilities on hover
-        const showUtilities = inBottomPanel(panels.utilities, x, y, true);
-
-        // Always update visibility based on hover if not in shortcut mode
-        if (!utilitiesShortcutActive) {
-            screenState.utilities = showUtilities;
-        } else if (showUtilities) {
-            // If hovering over utilities area while in shortcut mode, transition to hover control
-            utilitiesShortcutActive = false;
-        }
-
         // Show popouts on hover
         if (x < bar.implicitWidth) {
             bar.checkPopout(y);
@@ -257,7 +239,6 @@ CustomMouseArea {
             if (!root.screenState.launcher) {
                 root.dashboardShortcutActive = false;
                 root.osdShortcutActive = false;
-                root.utilitiesShortcutActive = false;
                 root.sidebarShortcutActive = false;
 
                 // Also hide dashboard and OSD if they're not being hovered
@@ -300,23 +281,10 @@ CustomMouseArea {
             }
         }
 
-        function onUtilitiesChanged() {
-            if (root.screenState.utilities) {
-                // Utilities became visible, immediately check if this should be shortcut mode
-                const inUtilitiesArea = root.inBottomPanel(root.panels.utilities, root.mouseX, root.mouseY);
-                if (!inUtilitiesArea) {
-                    root.utilitiesShortcutActive = true;
-                }
-            } else {
-                // Utilities hidden, clear shortcut flag
-                root.utilitiesShortcutActive = false;
-            }
-        }
-
         function onSidebarChanged() {
             if (root.screenState.sidebar) {
                 // Sidebar became visible, immediately check if this should be shortcut mode
-                const inSidebarArea = root.inRightPanel(root.panels.sidebar, root.mouseX, root.mouseY) || root.inRightPanel(root.panels.sessionWrapper, root.mouseX, root.mouseY) || root.inRightPanel(root.panels.utilities, root.mouseX, root.mouseY);
+                const inSidebarArea = root.inRightPanel(root.panels.sidebar, root.mouseX, root.mouseY) || root.inRightPanel(root.panels.sessionWrapper, root.mouseX, root.mouseY);
                 if (!inSidebarArea)
                     root.sidebarShortcutActive = true;
             } else {

@@ -36,7 +36,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.medium
+        radius: Tokens.rounding.large
         color: "transparent"
 
         Loader {

@@ -16,8 +16,8 @@ StyledRect {
             return base + Tokens.spacing.largeIncreased + forecast.implicitHeight + forecast.anchors.margins;
         return base + brief.anchors.topMargin;
     }
-    radius: Tokens.rounding.extraExtraLarge
-    color: Colours.tPalette.m3surfaceContainer
+    radius: Tokens.rounding.large
+    color: Colours.palette.m3surfaceContainer
 
     Timer {
         running: true

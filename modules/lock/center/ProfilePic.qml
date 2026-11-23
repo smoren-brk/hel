@@ -14,7 +14,7 @@ Item {
     id: root
 
     required property int centerWidth
-    readonly property color bgColour: Colours.tPalette.m3surfaceContainerHighest
+    readonly property color bgColour: Colours.palette.m3surfaceContainerHighest
 
     implicitWidth: Math.round(centerWidth * 0.7)
     implicitHeight: {

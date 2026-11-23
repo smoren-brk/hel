@@ -30,7 +30,6 @@ class ServiceConfig : public settings::ObjectNode {
     // Binary (KiB/MiB/GiB) or decimal (KB/MB/GB) data sizes
     CONFIG_GLOBAL_ENUM_PROPERTY(DataUnit, dataUnits, DataUnit::Binary)
     CONFIG_GLOBAL_ENUM_PROPERTY(ClockFormat, clockFormat, ClockFormat::Auto)
-    CONFIG_GLOBAL_ENUM_PROPERTY(GpuType, gpuType, GpuType::Auto)
     CONFIG_GLOBAL_PROPERTY(int, visualiserBars, 60)
     CONFIG_GLOBAL_PROPERTY(qreal, audioIncrement, 0.1)
     CONFIG_GLOBAL_PROPERTY(qreal, maxVolume, 1.0)

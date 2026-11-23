@@ -231,7 +231,7 @@ Item {
         anchors.leftMargin: -Tokens.padding.medium
         y: Tokens.padding.extraSmall
 
-        radius: Tokens.rounding.largeIncreased
+        radius: Tokens.rounding.full
         color: Colours.palette.m3secondaryContainer
         implicitWidth: wmLabel.implicitWidth + Tokens.padding.medium * 2
         implicitHeight: wmLabel.implicitHeight + Tokens.padding.small * 2

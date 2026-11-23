@@ -10,14 +10,12 @@ qml_module(hel-services
         tickingservice.cpp
         sensorslib.cpp
         cpu.cpp
-        gpu.cpp
         memory.cpp
         diskinfo.cpp
         storage.cpp
         lyriccandidate.cpp
         lyrics.cpp
         sessionmanager.cpp
-        networkusage.cpp
     LIBRARIES
         Qt::Concurrent
         Qt::DBus

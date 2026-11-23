@@ -14,14 +14,7 @@ Singleton {
     readonly property bool light: currentLight
     property bool currentLight
     readonly property M3Palette palette: current
-    readonly property M3Palette tPalette: current
     readonly property M3Palette current: M3Palette {}
-
-    function on(c: color): color {
-        if (c.hslLightness < 0.5)
-            return Qt.hsla(c.hslHue, c.hslSaturation, 0.9, 1);
-        return Qt.hsla(c.hslHue, c.hslSaturation, 0.1, 1);
-    }
 
     function load(data: string): void {
         const scheme = JSON.parse(data);

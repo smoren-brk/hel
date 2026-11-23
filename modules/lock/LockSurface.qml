@@ -5,7 +5,6 @@ import QtQuick.Effects
 import Quickshell.Wayland
 import Hel.Config
 import Hel.Multimedia
-import Hel.State
 import qs.components
 import qs.services
 
@@ -140,7 +139,7 @@ WlSessionLockSurface {
                 Anim {
                     target: lockBg
                     property: "radius"
-                    to: lockContent.Tokens.rounding.extraLarge * 1.5
+                    to: lockContent.Tokens.rounding.large
                 }
                 Anim {
                     target: lockContent
@@ -190,7 +189,7 @@ WlSessionLockSurface {
 
         Visual {
             source: Wallpapers.current
-            playing: PersistentState.wallpaperPlaying
+            playing: true
         }
     }
 

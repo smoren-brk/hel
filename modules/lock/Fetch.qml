@@ -18,8 +18,8 @@ StyledRect {
     readonly property int cBoxSize: Tokens.font.body.medium.pointSize * 2
 
     implicitHeight: layout.implicitHeight + layout.anchors.topMargin + layout.anchors.margins
-    radius: Tokens.rounding.medium
-    color: Colours.tPalette.m3surfaceContainer
+    radius: Tokens.rounding.large
+    color: Colours.palette.m3surfaceContainer
 
     ColumnLayout {
         id: layout

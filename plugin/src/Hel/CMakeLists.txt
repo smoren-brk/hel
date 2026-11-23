@@ -6,7 +6,6 @@ qml_module(hel-core
         qalculator.cpp
         requests.cpp
         toaster.cpp
-        circularbuffer.cpp
     LIBRARIES
         Qt::Gui
         Qt::Quick

@@ -31,10 +31,6 @@ Singleton {
         return null;
     }
 
-    function componentsForActive(): Components {
-        return components.instances.find(entry => entry.modelData.name === NiriService.focusedOutput) ?? components.instances[0] ?? null;
-    }
-
     Variants {
         id: states
 
@@ -59,18 +55,6 @@ Singleton {
         property var interactionWrapper
         property var bar
         property var panels
-
-        function find(name: string, rootItem: Item): var {
-            return CUtils.findChild(rootItem ?? rootWindow?.contentItem, name);
-        }
-
-        function findAll(name: string, rootItem: Item): var {
-            return CUtils.findChildren(rootItem ?? rootWindow?.contentItem, name);
-        }
-
-        function findMatching(pattern: string, rootItem: Item): var {
-            return CUtils.findChildrenMatching(rootItem ?? rootWindow?.contentItem, pattern);
-        }
     }
 
     component ComponentRef: QtObject {

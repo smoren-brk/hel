@@ -11,8 +11,7 @@
 #define CONFIG_PROPERTY SETTINGS_PROPERTY
 #define CONFIG_GLOBAL_PROPERTY SETTINGS_GLOBAL_PROPERTY
 
-#define CONFIG_ENUM_PROPERTY(Type, name, defaultVal)                                                                   \
-    CONFIG_PROPERTY(hel::shell::config::Type::Enum, name, defaultVal)
+#define CONFIG_ENUM_PROPERTY(Type, name, defaultVal) CONFIG_PROPERTY(hel::shell::config::Type::Enum, name, defaultVal)
 #define CONFIG_GLOBAL_ENUM_PROPERTY(Type, name, defaultVal)                                                            \
     CONFIG_GLOBAL_PROPERTY(hel::shell::config::Type::Enum, name, defaultVal)
 
@@ -52,28 +51,28 @@ CONFIG_LIST_TYPE(IconRule, IconRuleList)
 
 } // namespace hel::shell::config
 
-// Shorthand for declaring an ID'd entry (bar entries/status icons, quick toggles, etc)
+// Shorthand for declaring an ID'd entry (bar entries/status icons, etc)
 #define LIST_ENTRY(id, enabled)                                                                                        \
-    hel::shell::settings::vmap({                                                                                 \
+    hel::shell::settings::vmap({                                                                                       \
         { u"id"_s, QStringLiteral(#id) },                                                                              \
         { u"enabled"_s, enabled },                                                                                     \
     })
 
 // Shorthand for declaring an icon rule which is matched by name
 #define ICON_RULE_EXACT(name, icon)                                                                                    \
-    hel::shell::settings::vmap({                                                                                 \
+    hel::shell::settings::vmap({                                                                                       \
         { u"name"_s, QStringLiteral(name) },                                                                           \
         { u"icon"_s, QStringLiteral(icon) },                                                                           \
     })
 
 // Shorthand for declaring an icon rule which is matched by regex
 #define ICON_RULE_REGEX(regex, icon)                                                                                   \
-    hel::shell::settings::vmap({                                                                                 \
+    hel::shell::settings::vmap({                                                                                       \
         { u"regex"_s, QStringLiteral(regex) },                                                                         \
         { u"icon"_s, QStringLiteral(icon) },                                                                           \
     })
 #define ICON_RULE_REGEX_FLAGS(regex, flags, icon)                                                                      \
-    hel::shell::settings::vmap({                                                                                 \
+    hel::shell::settings::vmap({                                                                                       \
         { u"regex"_s, QStringLiteral(regex) },                                                                         \
         { u"flags"_s, QStringLiteral(flags) },                                                                         \
         { u"icon"_s, QStringLiteral(icon) },                                                                           \

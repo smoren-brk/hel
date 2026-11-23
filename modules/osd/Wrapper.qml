@@ -14,7 +14,7 @@ Item {
     required property bool sidebarOrSessionVisible
 
     property bool hovered
-    readonly property bool shouldBeActive: screenState.osd && Config.osd.enabled && Config.osd.enableMicrophone && !(screenState.utilities && Config.utilities.enabled)
+    readonly property bool shouldBeActive: screenState.osd && Config.osd.enabled && Config.osd.enableMicrophone
     property real offsetScale: shouldBeActive ? 0 : 1
     property real sidebarOffset: sidebarOrSessionVisible ? 12 : 0
 

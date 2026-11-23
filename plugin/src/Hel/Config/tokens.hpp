@@ -37,7 +37,6 @@ class RoundingTokens : public settings::ObjectNode {
     CONFIG_PROPERTY(int, largeIncreased, 20)
     CONFIG_PROPERTY(int, extraLarge, 28)
     CONFIG_PROPERTY(int, extraLargeIncreased, 32)
-    CONFIG_PROPERTY(int, extraExtraLarge, 48)
     CONFIG_PROPERTY(int, full, std::numeric_limits<int>::max())
 };
 
@@ -64,18 +63,6 @@ class PaddingTokens : public settings::ObjectNode {
     CONFIG_PROPERTY(int, largeIncreased, 20)
     CONFIG_PROPERTY(int, extraLarge, 28)
     CONFIG_PROPERTY(int, extraLargeIncreased, 32)
-    CONFIG_PROPERTY(int, extraExtraLarge, 48)
-};
-
-class FontSizeTokens : public settings::ObjectNode {
-    CONFIG_NODE(FontSizeTokens, settings::ObjectNode)
-
-    CONFIG_PROPERTY(int, small, 11)
-    CONFIG_PROPERTY(int, smaller, 12)
-    CONFIG_PROPERTY(int, normal, 13)
-    CONFIG_PROPERTY(int, larger, 15)
-    CONFIG_PROPERTY(int, large, 18)
-    CONFIG_PROPERTY(int, extraLarge, 28)
 };
 
 class AnimDurationTokens : public settings::ObjectNode {
@@ -100,7 +87,6 @@ class AppearanceTokens : public settings::ObjectNode {
     CONFIG_SUBOBJECT(RoundingTokens, rounding)
     CONFIG_SUBOBJECT(SpacingTokens, spacing)
     CONFIG_SUBOBJECT(PaddingTokens, padding)
-    CONFIG_SUBOBJECT(FontSizeTokens, fontSize)
     CONFIG_SUBOBJECT(AnimDurationTokens, animDurations)
 };
 
@@ -172,7 +158,6 @@ class SidebarTokens : public settings::ObjectNode {
 class UtilitiesTokens : public settings::ObjectNode {
     CONFIG_NODE(UtilitiesTokens, settings::ObjectNode)
 
-    CONFIG_PROPERTY(int, width, 430)
     CONFIG_PROPERTY(int, toastWidth, 430)
 };
 
@@ -192,26 +177,6 @@ class LockTokens : public settings::ObjectNode {
     CONFIG_PROPERTY(int, showColourBoxRowHeight, 570)
 };
 
-class NexusTokens : public settings::ObjectNode {
-    CONFIG_NODE(NexusTokens, settings::ObjectNode)
-
-    CONFIG_PROPERTY(qreal, heightMult, 0.7)
-    CONFIG_PROPERTY(qreal, ratio, 16.0 / 9.0)
-    CONFIG_PROPERTY(int, minWidth, 800)
-    CONFIG_PROPERTY(int, minHeight, 500)
-    CONFIG_PROPERTY(int, maxNavWidth, 600)
-    CONFIG_PROPERTY(int, maxContentWidth, 800)
-    CONFIG_PROPERTY(int, popupWidth, 300)
-    CONFIG_PROPERTY(int, minPopupHeight, 200)
-    CONFIG_PROPERTY(int, maxPopupHeight, 800)
-    CONFIG_PROPERTY(int, networkShowEthDetailWidth, 620)
-    CONFIG_PROPERTY(int, networkShowVpnDetailWidth, 620)
-    CONFIG_PROPERTY(int, maxDialogWidth, 400)
-    CONFIG_PROPERTY(int, maxDialogHeight, 600)
-    CONFIG_PROPERTY(int, textFieldWidth, 250)
-    CONFIG_PROPERTY(int, smallTextFieldWidth, 100)
-};
-
 class SizeTokens : public settings::ObjectNode {
     CONFIG_NODE(SizeTokens, settings::ObjectNode)
 
@@ -224,7 +189,6 @@ class SizeTokens : public settings::ObjectNode {
     CONFIG_SUBOBJECT(SidebarTokens, sidebar)
     CONFIG_SUBOBJECT(UtilitiesTokens, utilities)
     CONFIG_SUBOBJECT(LockTokens, lock)
-    CONFIG_SUBOBJECT(NexusTokens, nexus)
 };
 
 } // namespace hel::shell::config

@@ -2,7 +2,6 @@ import QtQuick
 import Hel.Config
 import Hel.Models
 import Hel.Multimedia
-import Hel.State
 import qs.components
 import qs.components.effects
 import qs.services
@@ -53,7 +52,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         y: Tokens.padding.large
-        color: Colours.tPalette.m3surfaceContainer
+        color: Colours.palette.m3surfaceContainer
         radius: Tokens.rounding.large
 
         implicitWidth: Tokens.sizes.launcher.wallpaperWidth
@@ -62,14 +61,14 @@ Item {
         MaterialIcon {
             anchors.centerIn: parent
             text: "image"
-            color: Colours.tPalette.m3outline
+            color: Colours.palette.m3outline
             fontStyle: Tokens.font.icon.builders.extraLarge.scale(2).weight(Font.DemiBold).build()
         }
 
         Visual {
             anchors.fill: parent
             source: root.modelData.path
-            playing: (root.PathView.isCurrentItem && PersistentState.wallpaperPlaying) || stateLayer.containsMouse
+            playing: root.PathView.isCurrentItem || stateLayer.containsMouse
         }
     }
 

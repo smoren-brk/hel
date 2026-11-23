@@ -11,8 +11,8 @@ import qs.utils
 StyledRect {
     id: root
 
-    color: Colours.palette.m3surfaceContainerHigh
-    radius: Tokens.rounding.extraLargeIncreased
+    color: Colours.palette.m3surfaceContainer
+    radius: Tokens.rounding.large
     implicitHeight: header.anchors.margins + header.implicitHeight + Tokens.spacing.medium + layout.implicitHeight + layout.anchors.bottomMargin
 
     RowLayout {

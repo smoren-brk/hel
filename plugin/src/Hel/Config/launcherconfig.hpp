@@ -103,12 +103,6 @@ class LauncherConfig : public settings::ObjectNode {
                 { u"description"_s, mark(u"Suspend then hibernate"_s) },
                 { u"command"_s, QStringList{ u"suspendThenHibernate"_s } },
             }),
-            vmap({
-                { u"name"_s, markCtx(u"Settings"_s, u"launcher action"_s) },
-                { u"icon"_s, u"settings"_s },
-                { u"description"_s, mark(u"Configure the shell"_s) },
-                { u"command"_s, QStringList{ u"openSettings"_s } },
-            }),
         }))
 };
 

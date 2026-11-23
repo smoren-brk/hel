@@ -4,8 +4,8 @@ import Quickshell.Io
 import Hel
 import Hel.Config
 import Hel.I18n
+import Hel.State
 import qs.services
-import qs.modules.nexus
 
 Scope {
     id: root
@@ -13,14 +13,15 @@ Scope {
     readonly property bool hasFullscreen: NiriService.hasFullscreen(NiriService.focusedOutput)
 
     function barMode(): string {
+        if (PersistentState.barMode.length > 0)
+            return PersistentState.barMode;
         if (GlobalConfig.bar.persistent)
             return "always";
         return GlobalConfig.bar.showOnHover ? "hover" : "hidden";
     }
 
     function setBarMode(mode: string): void {
-        GlobalConfig.bar.persistent = mode === "always";
-        GlobalConfig.bar.showOnHover = mode !== "hidden";
+        PersistentState.barMode = mode;
         for (let i = 0; i < Screens.screens.length; i++)
             ShellState.forScreen(Screens.screens[i]).bar = false;
     }
@@ -69,15 +70,14 @@ Scope {
             Toaster.toast(Tr.tr("Status bar"), labels[next], "dock");
         }
 
-        target: "bar"
-    }
-
-    IpcHandler {
-        function open(): void {
-            WindowFactory.create();
+        function reset(): void {
+            PersistentState.barMode = "";
+            for (let i = 0; i < Screens.screens.length; i++)
+                ShellState.forScreen(Screens.screens[i]).bar = false;
+            Toaster.toast(Tr.tr("Status bar"), Tr.tr("Using configured mode"), "dock");
         }
 
-        target: "nexus"
+        target: "bar"
     }
 
     IpcHandler {

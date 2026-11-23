@@ -8,7 +8,6 @@ import Hel.Services
 import qs.services
 import qs.utils
 import qs.modules.launcher
-import qs.modules.nexus
 
 Searcher {
     id: root
@@ -49,9 +48,6 @@ Searcher {
             } else if (command[0] === "randomWallpaper") {
                 list.screenState.launcher = false;
                 Wallpapers.setRandom();
-            } else if (command[0] === "openSettings") {
-                list.screenState.launcher = false;
-                WindowFactory.create();
             } else {
                 list.screenState.launcher = false;
                 if (!SessionManager.exec(command))

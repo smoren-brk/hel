@@ -14,8 +14,6 @@ import qs.utils
 ColumnLayout {
     id: root
 
-    required property PopoutState popouts
-
     width: 300
     spacing: Tokens.spacing.small
 
@@ -171,18 +169,6 @@ ColumnLayout {
                 }
             }
         }
-    }
-
-    IconTextButton {
-        Layout.fillWidth: true
-        Layout.topMargin: Tokens.spacing.medium
-        inactiveColour: Colours.palette.m3primaryContainer
-        inactiveOnColour: Colours.palette.m3onPrimaryContainer
-        verticalPadding: Tokens.padding.extraSmall
-        text: Tr.tr("Open settings")
-        icon: "settings"
-
-        onClicked: root.popouts.detachRequested("bluetooth")
     }
 
     component Toggle: RowLayout {

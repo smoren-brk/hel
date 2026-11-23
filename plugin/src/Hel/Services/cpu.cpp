@@ -12,14 +12,8 @@ namespace hel::shell::services {
 using Qt::StringLiterals::operator""_s;
 
 Cpu::Cpu(QObject* parent)
-    : TickingService(parent)
-    , m_history(new CircularBuffer(this)) {
-    m_history->setCapacity(30);
+    : TickingService(parent) {
     readNameOnce();
-}
-
-CircularBuffer* Cpu::history() const {
-    return m_history;
 }
 
 QString Cpu::name() const {
@@ -103,7 +97,6 @@ void Cpu::refreshPercentage() {
     m_lastTotal = total;
     m_lastIdle = idle;
 
-    m_history->push(newPerc);
     if (std::abs(newPerc - m_percentage) > 0.0001) {
         m_percentage = newPerc;
         emit percentageChanged();

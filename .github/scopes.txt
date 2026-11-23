@@ -4,14 +4,12 @@ dashboard
 drawers
 launcher
 lock
-nexus
 notifs
 osd
 picker
 toasts
 session
 sidebar
-utilities
 
 blobs
 components

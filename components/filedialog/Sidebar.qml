@@ -16,7 +16,7 @@ StyledRect {
     implicitWidth: Sizes.sidebarWidth
     implicitHeight: inner.implicitHeight + Tokens.padding.medium * 2
 
-    color: Colours.tPalette.m3surfaceContainer
+    color: Colours.palette.m3surfaceContainer
 
     ColumnLayout {
         id: inner

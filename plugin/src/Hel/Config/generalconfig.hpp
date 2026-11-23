@@ -18,9 +18,6 @@ class GeneralApps : public settings::ObjectNode {
     CONFIG_NODE(GeneralApps, settings::ObjectNode)
 
     CONFIG_PROPERTY(QStringList, terminal, { u"foot"_s })
-    CONFIG_PROPERTY(QStringList, audio, { u"pwvucontrol"_s })
-    CONFIG_PROPERTY(QStringList, playback, { u"mpv"_s })
-    CONFIG_PROPERTY(QStringList, explorer, { u"thunar"_s })
 };
 
 class GeneralIdleTimeout : public settings::ObjectNode {

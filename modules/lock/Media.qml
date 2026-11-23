@@ -15,8 +15,8 @@ ClipRect {
     required property var lock
 
     implicitHeight: layout.implicitHeight + layout.anchors.margins * 2
-    radius: Tokens.rounding.extraLarge
-    color: Colours.tPalette.m3surfaceContainer
+    radius: Tokens.rounding.large
+    color: Colours.palette.m3surfaceContainer
 
     FadeImage {
         anchors.fill: parent

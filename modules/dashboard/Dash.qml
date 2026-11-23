@@ -20,7 +20,7 @@ GridLayout {
         Layout.preferredWidth: Tokens.sizes.dashboard.userWidth
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.extraLarge
+        radius: Tokens.rounding.large
 
         User {
             id: user
@@ -36,7 +36,7 @@ GridLayout {
         Layout.preferredWidth: Tokens.sizes.dashboard.weatherWidth
         Layout.preferredHeight: weather.implicitHeight
 
-        radius: Tokens.rounding.extraLarge * 1.5
+        radius: Tokens.rounding.large
 
         SmallWeather {
             id: weather
@@ -50,7 +50,7 @@ GridLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: calendar.implicitHeight
 
-        radius: Tokens.rounding.extraLarge
+        radius: Tokens.rounding.large
 
         Calendar {
             id: calendar
@@ -68,7 +68,7 @@ GridLayout {
         Layout.preferredWidth: media.implicitWidth
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.extraLarge * 2
+        radius: Tokens.rounding.large
 
         Media {
             id: media
@@ -76,6 +76,6 @@ GridLayout {
     }
 
     component Rect: StyledRect {
-        color: Colours.tPalette.m3surfaceContainer
+        color: Colours.palette.m3surfaceContainer
     }
 }

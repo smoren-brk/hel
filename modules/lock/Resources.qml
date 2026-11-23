@@ -24,8 +24,8 @@ StyledRect {
     }
 
     implicitHeight: layout.implicitHeight + Tokens.padding.large * 2
-    radius: Tokens.rounding.extraLarge
-    color: Colours.tPalette.m3surfaceContainer
+    radius: Tokens.rounding.large
+    color: Colours.palette.m3surfaceContainer
 
     ServiceRef {
         service: Cpu
@@ -196,9 +196,9 @@ StyledRect {
         Layout.fillWidth: true
         Layout.preferredHeight: width
 
-        inactiveColour: activeFocus ? Colours.palette.m3secondaryContainer : Colours.tPalette.m3surfaceContainerHigh
+        inactiveColour: activeFocus ? Colours.palette.m3secondaryContainer : Colours.palette.m3surfaceContainerHigh
         inactiveOnColour: activeFocus ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
-        radius: pressed ? Tokens.rounding.medium : activeFocus ? Tokens.rounding.extraLarge : Tokens.rounding.largeIncreased
+        radius: pressed ? Tokens.rounding.medium : Tokens.rounding.large
         font: Tokens.font.icon.builders.large.scale(root.fontScale * 1.3).build()
         onClicked: exec()
     }

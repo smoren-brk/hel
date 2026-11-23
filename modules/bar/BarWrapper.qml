@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Hel.Config
+import Hel.State
 import qs.components
 import qs.services
 import qs.utils
@@ -17,12 +18,14 @@ Item {
     required property bool fullscreen
 
     readonly property bool disabled: (Config.bar.onlyOnMainScreen && !Screens.isMain(screen)) || Strings.testRegexList(Config.bar.excludedScreens, screen.name)
+    readonly property bool persistent: PersistentState.barMode.length > 0 ? PersistentState.barMode === "always" : Config.bar.persistent
+    readonly property bool showOnHover: PersistentState.barMode.length > 0 ? PersistentState.barMode === "hover" : Config.bar.showOnHover
 
     readonly property int clampedWidth: Math.max(Tokens.padding.small, implicitWidth)
     readonly property int padding: Math.max(Tokens.padding.small, Config.border.thickness)
     readonly property int contentWidth: Tokens.sizes.bar.innerWidth + padding * 2
-    readonly property int exclusiveZone: !disabled && (Config.bar.persistent || (Config.bar.showOnHover && screenState.bar)) ? contentWidth : Config.border.thickness
-    readonly property bool shouldBeVisible: !fullscreen && !disabled && (Config.bar.persistent || (Config.bar.showOnHover && (screenState.bar || isHovered)))
+    readonly property int exclusiveZone: !disabled && (persistent || (showOnHover && screenState.bar)) ? contentWidth : Config.border.thickness
+    readonly property bool shouldBeVisible: !fullscreen && !disabled && (persistent || (showOnHover && (screenState.bar || isHovered)))
     property bool isHovered
 
     function closeTray(): void {

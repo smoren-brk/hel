@@ -28,10 +28,10 @@ StyledWindow {
     readonly property real shadowOpacity: 0.7 * (1 - fsTransitionProg)
     readonly property real borderLayoutThickness: hasFullscreen ? 0 : contentItem.Config.border.thickness
 
-    property color surfaceColour: Colours.tPalette.m3surface
+    property color surfaceColour: Colours.palette.m3surface
 
     readonly property int dragMaskPadding: {
-        if (screenState.launcher || screenState.session || screenState.sidebar || screenState.dashboard || panels.popouts.isDetached)
+        if (screenState.launcher || screenState.session || screenState.sidebar || screenState.dashboard)
             return 0;
 
         if (NiriService.visibleWindows(screen.name).length > 0)
@@ -97,7 +97,7 @@ StyledWindow {
 
     StyledRect {
         anchors.fill: parent
-        opacity: (root.screenState.session && Config.session.enabled) || panels.popouts.detachedMode !== "" ? 0.5 : 0
+        opacity: (root.screenState.session && Config.session.enabled) ? 0.5 : 0
         color: Colours.palette.m3scrim
 
         Behavior on opacity {
@@ -164,7 +164,6 @@ StyledWindow {
             panel: panels.sidebar
             deformAmount: 0.03
             implicitHeight: panel.height * (1 / rawDeformMatrix.m22) + 2
-            exclude: panels.sidebar.offsetScale > 0.08 ? [] : [utilsBg]
             bottomLeftRadius: Math.max(0, Math.min(1, panels.sidebar.offsetScale / 0.3)) * radius
         }
 
@@ -184,30 +183,17 @@ StyledWindow {
         }
 
         PanelBg {
-            id: utilsBg
-
-            panel: panels.utilities
-            deformAmount: panels.sidebar.visible ? 0.1 : 0.15
-            exclude: panels.sidebar.offsetScale > 0.08 ? [] : [sidebarBg]
-            topLeftRadius: Math.max(0, Math.min(1, panels.sidebar.offsetScale / 0.3)) * radius
-        }
-
-        PanelBg {
             id: popoutBg
 
             // Extra width to prevent vertical movement deformation partially detaching panel from bar
-            property real extraWidth: panels.popouts.isDetached ? 0 : 0.2
+            property real extraWidth: 0.2
 
             panel: panels.popoutsWrapper
-            deformAmount: panels.popouts.isDetached ? 0.05 : panels.popouts.hasCurrent ? 0.15 : 0.1
+            deformAmount: panels.popouts.hasCurrent ? 0.15 : 0.1
             x: panels.popoutsWrapper.x + panels.popouts.x + bar.implicitWidth - panels.popouts.width * extraWidth
             implicitWidth: panels.popouts.width * (1 + extraWidth)
-            topLeftRadius: panels.popouts.isDetached ? radius : 0
-            bottomLeftRadius: panels.popouts.isDetached ? radius : 0
-
-            Behavior on extraWidth {
-                Anim {}
-            }
+            topLeftRadius: 0
+            bottomLeftRadius: 0
         }
     }
 
@@ -230,8 +216,6 @@ StyledWindow {
             bar: bar
             borderThickness: root.borderThickness
 
-            utilities.horizontalStretch: (sidebarBg.rawDeformMatrix.m11 - 1) / 2 + 1
-
             dashboard.transform: Matrix4x4 {
                 matrix: dashBg.deformMatrix
             }
@@ -249,9 +233,6 @@ StyledWindow {
             }
             notifications.transform: Matrix4x4 {
                 matrix: notifsBg.deformMatrix
-            }
-            utilities.transform: Matrix4x4 {
-                matrix: utilsBg.deformMatrix
             }
             popouts.transform: Matrix4x4 {
                 matrix: popoutBg.deformMatrix

@@ -19,7 +19,6 @@ namespace hel::shell::config {
     };
 
 ENUM(LyricsBackend, Auto, Local, LRCLIB, NetEase)
-ENUM(GpuType, Auto, Nvidia, Generic, None)
 ENUM(NotifsFullscreen, On, Off)
 ENUM(TemperatureUnit, Auto, Celsius, Fahrenheit, Kelvin)
 ENUM(DataUnit, Binary, Decimal)

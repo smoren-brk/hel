@@ -6,7 +6,6 @@ import Quickshell.Io
 import Hel.Config
 import Hel.State
 import Hel.Models
-import qs.services
 import qs.utils
 
 Searcher {
@@ -18,13 +17,6 @@ Searcher {
     readonly property string current: showPreview ? previewPath : actualCurrent
     property string previewPath
     readonly property string actualCurrent: PersistentState.wallpaperPath || fallback
-
-    function getCategoryFor(w: FileSystemEntry): string {
-        let category = w.parentDir.slice(Paths.wallsdir.length + 1);
-        if (category.includes("/"))
-            category = category.slice(0, category.indexOf("/"));
-        return category;
-    }
 
     function setRandom(): void {
         if (list.length)

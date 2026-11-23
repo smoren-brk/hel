@@ -17,7 +17,6 @@ Singleton {
 
     property list<PwNode> sinks: []
     property list<PwNode> sources: []
-    property list<PwNode> streams: []
 
     readonly property PwNode sink: Pipewire.defaultAudioSink
     readonly property PwNode source: Pipewire.defaultAudioSource
@@ -78,38 +77,9 @@ Singleton {
         setAudioSink(sinks[nextIndex]);
     }
 
-    function setStreamVolume(stream: PwNode, newVolume: real): void {
-        if (stream?.ready && stream?.audio) {
-            stream.audio.muted = false;
-            stream.audio.volume = Math.max(0, Math.min(GlobalConfig.services.maxVolume, newVolume));
-        }
-    }
-
-    function setStreamMuted(stream: PwNode, muted: bool): void {
-        if (stream?.ready && stream?.audio) {
-            stream.audio.muted = muted;
-        }
-    }
-
-    function getStreamVolume(stream: PwNode): real {
-        return stream?.audio?.volume ?? 0;
-    }
-
-    function getStreamMuted(stream: PwNode): bool {
-        return !!stream?.audio?.muted;
-    }
-
-    function getStreamName(stream: PwNode): string {
-        if (!stream)
-            return Tr.trCtx("Unknown", "unknown audio stream");
-        // Try application name first, then description, then name
-        return stream.properties["application.name"] || stream.description || stream.name || Tr.trCtx("Unknown application", "unknown application audio stream");
-    }
-
     function refreshNodes(): void {
         const newSinks = [];
         const newSources = [];
-        const newStreams = [];
 
         for (const node of Pipewire.nodes.values) {
             if (!node.isStream) {
@@ -117,14 +87,11 @@ Singleton {
                     newSinks.push(node);
                 else if (node.audio)
                     newSources.push(node);
-            } else if (node.audio) {
-                newStreams.push(node);
             }
         }
 
         root.sinks = newSinks;
         root.sources = newSources;
-        root.streams = newStreams;
     }
 
     onSinkChanged: {
@@ -170,7 +137,7 @@ Singleton {
     // Always track the current defaults so volume/mute bind even if the lists
     // momentarily lag behind the default node.
     PwObjectTracker {
-        objects: [root.sink, root.source, ...root.sinks, ...root.sources, ...root.streams].filter(n => n)
+        objects: [root.sink, root.source, ...root.sinks, ...root.sources].filter(n => n)
     }
 
     CavaProvider {

@@ -20,18 +20,17 @@ Add bindings to your Niri configuration after installing the package. Each comma
 binds {
     Mod+Space { spawn "hel" "ipc" "call" "drawers" "toggle" "launcher"; }
     Mod+Shift+D { spawn "hel" "ipc" "call" "drawers" "toggle" "dashboard"; }
-    Mod+Shift+Space { spawn "hel" "ipc" "call" "nexus" "open"; }
     Mod+Shift+S { spawn "hel" "ipc" "call" "picker" "openFreezeClip"; }
 }
 ```
 
 Run `hel ipc show` to list IPC targets and methods. The picker captures a dragged rectangle. Workspace buttons switch immediately on click and show the active workspace on each output.
 
-The bar mode is cycled with `hel ipc call bar cycle` through always shown, reveal on hover, and always hidden. `hel ipc call bar mode` reports the current mode. By default the bar is only drawn on the main output (the screen at the compositor origin); disable `bar.onlyOnMainScreen` to show it on every display.
+The bar mode is cycled with `hel ipc call bar cycle` through always shown, reveal on hover, and always hidden. `hel ipc call bar reset` returns to the configured mode, and `hel ipc call bar mode` reports the current mode. By default the bar is only drawn on the main output (the screen at the compositor origin); disable `bar.onlyOnMainScreen` to show it on every display.
 
 ## Configuration
 
-Open settings with `hel ipc call nexus open`. Existing shell settings use `~/.config/hel/shell.json`. An output-specific override goes in `~/.config/hel/monitors/DP-1/shell.json`, replacing `DP-1` with an output name from `niri msg outputs`. For example, this makes the bar reveal on hover on that display.
+Shell settings use `~/.config/hel/shell.json`, which the shell watches for changes. An output-specific override goes in `~/.config/hel/monitors/DP-1/shell.json`, replacing `DP-1` with an output name from `niri msg outputs`. For example, this makes the bar reveal on hover on that display.
 
 ```json
 {
@@ -46,6 +45,44 @@ Hel uses opaque Carbonfox panels. Hover over the bar clock to open the calendar.
 The launcher reads wallpapers from `~/Pictures/Wallpapers` by default. Set `paths.wallpaperDir` to change the directory. Set `HEL_WALLPAPER` to a file path to override the fallback wallpaper. Type `>wallpaper` in the launcher or run `hel ipc call wallpaper set /absolute/path/to/image`. Hel saves the selection between sessions. The dashboard reads the profile picture from `~/.face`.
 
 The [configuration definitions](plugin/src/Hel/Config) list the available settings and defaults. Visual tokens can be overridden in `shell-tokens.json` alongside the main settings file.
+
+## NixOS module
+
+The flake exports `nixosModules.default`, which installs the shell and writes the JSON config for the listed users. Add the flake input and import the module:
+
+```nix
+{
+  inputs.hel.url = "github:smoren-brk/hel";
+
+  # In a NixOS configuration:
+  imports = [ inputs.hel.nixosModules.default ];
+
+  programs.hel = {
+    enable = true;
+    users = [ "alice" ];
+
+    settings = {
+      bar = {
+        persistent = false;
+        showOnHover = true;
+      };
+      services.weatherLocation = "Novi Sad";
+    };
+
+    tokens = {
+      sizes.bar.innerWidth = 40;
+    };
+
+    monitors."DP-1".settings = {
+      bar.persistent = true;
+    };
+  };
+}
+```
+
+`settings` and `tokens` are written to `~/.config/hel/shell.json` and `~/.config/hel/shell-tokens.json`, and `monitors.<output>` writes the per-output overrides under `~/.config/hel/monitors`. The files are symlinked from the Nix store for each user in `programs.hel.users`; the package is installed for every user regardless. Enabling the module replaces any existing files at those paths, so move manual settings into `programs.hel.settings` first.
+
+Because the config belongs to Nix, edit it through the module rather than the symlinked files. Runtime changes such as `hel ipc call bar cycle` are kept in the shell's state directory instead of rewriting the config. Run `hel ipc call bar reset` to return to the configured bar mode.
 
 ## Development
 

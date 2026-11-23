@@ -17,7 +17,7 @@ Item {
     required property real maxHeight
 
     readonly property int padding: Tokens.padding.large
-    readonly property int rounding: Tokens.rounding.extraLarge
+    readonly property int rounding: Tokens.rounding.large
 
     implicitWidth: listWrapper.width + padding * 2
     implicitHeight: search.height + listWrapper.height + padding + search.anchors.bottomMargin
